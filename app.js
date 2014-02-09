@@ -8,17 +8,20 @@ var routes = require('./routes');
 var user = require('./routes/user');
 var http = require('http');
 var path = require('path');
+var cntrls = require('./controllers');
 
 var app = express();
+app.engine('html', require('hogan-express'));
 
 // all environments
 app.set('port', process.env.PORT || 3000);
 app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'hjs');
+app.set('view engine', 'html');
 app.use(express.favicon());
 app.use(express.logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded());
+app.use(express.bodyParser());
 app.use(express.methodOverride());
 app.use(app.router);
 app.use(require('less-middleware')({ src: path.join(__dirname, 'public') }));
@@ -31,6 +34,7 @@ if ('development' == app.get('env')) {
 
 app.get('/', routes.index);
 app.get('/users', user.list);
+app.put('/', cntrls.PostHandler.PostHandler.processForm);
 
 
 http.createServer(app).listen(app.get('port'), function(){
