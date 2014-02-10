@@ -1,0 +1,19 @@
+<div class="panel-group" id="accordion">
+
+    {{#stories}}
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h4 class="panel-title">
+                <a data-toggle="collapse" data-parent="#accordion" href="#collapse{{id}}">
+                    {{title}}
+                </a>
+            </h4>
+        </div>
+        <div id="collapse{{id}}" class="panel-collapse collapse">
+            <div class="panel-body">
+                {{copy}}
+            </div>
+        </div>
+    </div>
+    {{/stories}}
+</div>

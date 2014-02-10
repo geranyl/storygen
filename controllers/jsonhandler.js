@@ -14,19 +14,23 @@ var JSONHandler = {
             } else {
                 console.log("The file was saved!");
 
-               render.renderHome(req, res);
+
 
 
             }
         });
     },
-    readJSON: function(){
+    readJSON: function(req, res){
         fs.readFile('./public/files/file.json', 'utf8', function (err, data){
             if(err){
                 console.log(err);
             }else{
                 data = JSON.parse(data);
-                console.dir(data);
+                console.dir(data.items);
+
+                render.renderHome(req, res, data.items);
+
+
             }
         });
     }

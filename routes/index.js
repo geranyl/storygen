@@ -15,15 +15,19 @@ exports.index = function(req, res){
     }
 
 
-    jsonWriter.readJSON();
+    jsonWriter.readJSON(req, res);
 
-    jsonWriter.writeJSON(req, res, rawString);
+   // jsonWriter.writeJSON(req, res, rawString);
 
 };
 
-exports.renderHome = function(req, res){
+exports.renderHome = function(req, res, data){
+
+    res.locals.stories =  data;
     res.render('index', {
+
         partials: {
+            stories: 'stories',
             part: 'part'
         }
     });
