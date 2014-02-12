@@ -8,7 +8,7 @@ var routes = require('./routes');
 var user = require('./routes/user');
 var http = require('http');
 var path = require('path');
-var cntrls = require('./controllers');
+var postHandler = require('./controllers/posthandler.js').PostHandler;
 
 var app = express();
 app.engine('html', require('hogan-express'));
@@ -35,7 +35,7 @@ if ('development' == app.get('env')) {
 
 app.get('/', routes.index);
 app.get('/users', user.list);
-app.put('/', cntrls.PostHandler.PostHandler.processForm);
+app.put('/', postHandler.processForm);
 
 
 http.createServer(app).listen(app.get('port'), function(){

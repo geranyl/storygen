@@ -1,11 +1,12 @@
 var fs = require('fs'),
     path = require('path'),
     __parentDir = path.dirname(module.parent.filename),
-    render = require('../routes/index.js');
+    render = require('../routes/index.js'),
+    dataModel = require('./datamodel.js').DataModel;
 
 
 var JSONHandler = {
-    writeJSON: function (req, res, rawString) {
+    writeJSON: function (rawString, callback) {
         var jsonString = JSON.stringify(rawString, 0, 4);
 
         fs.writeFile('./public/files/file.json', jsonString, function (err) {
@@ -25,10 +26,21 @@ var JSONHandler = {
             if(err){
                 console.log(err);
             }else{
-                data = JSON.parse(data);
-                console.dir(data.items);
 
-                render.renderHome(req, res, data.items);
+                var json = JSON.parse(data);
+
+                if(!data || !JSON.parse(data).items){
+                    data = {"items":[]};
+                    console.log('no data')
+                }else{
+                    data = json;
+                }
+
+
+                dataModel.createModel(data);
+
+
+                render.renderHome(req, res, data.items); //TODO: callback this instead of a permanent action
 
 
             }

@@ -1,4 +1,4 @@
-var jsonWriter = require ('../controllers/JSONHandler').JSONHandler;
+var jsonHandler = require ('../controllers/jsonhandler.js').JSONHandler;
 /*
  * GET home page.
  */
@@ -15,9 +15,9 @@ exports.index = function(req, res){
     }
 
 
-    jsonWriter.readJSON(req, res);
+    jsonHandler.readJSON(req, res);
 
-   // jsonWriter.writeJSON(req, res, rawString);
+   // jsonHandler.writeJSON(req, res, rawString);
 
 };
 
@@ -32,3 +32,10 @@ exports.renderHome = function(req, res, data){
         }
     });
 }
+
+
+
+/**TODO: Object should be a) intro area and then an array for choices presented, and the choices themselves need to have linked nodes**/
+
+/**Node: id, title, intro text, choices array**/
+/**Choice: id, title, text, nodes array**/
