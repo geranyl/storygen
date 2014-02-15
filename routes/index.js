@@ -23,13 +23,13 @@ exports.index = function(req, res){
 
 exports.renderHome = function(req, res, data){
 
-    res.locals.stories =  data;
+   res.locals.chart = data;
+
+    //if chart data
+    //res.locals.chart = [{"title":"hello"}, {"text":"some stuff", "parentNodeId":"1"}];
     res.render('index', {
 
-        partials: {
-            stories: 'stories',
-            part: 'part'
-        }
+
     });
 }
 

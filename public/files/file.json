@@ -1,38 +1,55 @@
 {
     "items": [
         {
-            "id": 0,
+            "id": 1,
             "choices": [
                 {
                     "id": "0_0",
                     "text": "asdfasdfadf asfda f",
-                    "parentNodeId": 0
+                    "parentNodeId": 1,
+                    "nextNodeId":2
                 },
                 {
                     "id": "0_1",
                     "text": "asdfasdfasfa fdsafdsaf",
-                    "parentNodeId": 0
+                    "parentNodeId": 1,
+                    "nextNodeId":3
                 }
             ],
             "title": "sdfs",
             "copy": "fasfa"
         },
         {
-            "id": 1,
+            "id": 2,
             "choices": [
                 {
                     "id": "1_0",
                     "text": "sdfadf",
-                    "parentNodeId": 1
+                    "parentNodeId": 2
                 },
                 {
                     "id": "1_1",
                     "text": "asdfad",
-                    "parentNodeId": 1
+                    "parentNodeId": 2
                 }
             ],
             "title": "adfa",
             "copy": "adfa"
+        },
+        {
+            "id": 0,
+            "day": -1,
+            "title": "sdfs",
+            "text": "",
+            "choices": [],
+            "copy": ""
+        },
+        {
+            "id": 3,
+            "day": -1,
+            "title": "",
+            "text": "",
+            "choices": []
         }
     ]
 }

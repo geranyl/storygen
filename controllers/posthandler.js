@@ -4,7 +4,9 @@
 
 var render = require('../routes/index.js'),
 
-    dataModel = require('./datamodel.js').DataModel;
+    dataModel = require('./datamodel.js').DataModel,
+
+    chartFormatter = require('./chart.js');
 
 var PostHandler = {
     processForm: function(req, res){
@@ -22,9 +24,10 @@ var PostHandler = {
 
         dataModel.addStoryNode(req.body.nodeId, req.body.title, req.body.copy, req.body.choice1, req.body.choice2);
 
+        var data = chartFormatter.render(dataModel.currentData);
 
 
-        render.renderHome(req, res);
+        render.renderHome(req, res, data);
     }
 }
 

@@ -4,6 +4,7 @@
  */
 
 var express = require('express');
+var hbrs = require('express3-handlebars');
 var routes = require('./routes');
 var user = require('./routes/user');
 var http = require('http');
@@ -11,7 +12,7 @@ var path = require('path');
 var postHandler = require('./controllers/posthandler.js').PostHandler;
 
 var app = express();
-app.engine('html', require('hogan-express'));
+app.engine('html', hbrs({extname:'.html'}));
 
 // all environments
 app.set('port', process.env.PORT || 3000);

@@ -38,16 +38,16 @@ var DataModel = {
 
 
             function createChoiceNode(idNum, text, parentNodeId) {
-                var c1 = new storyObjs.Choice();
+                var c1 = storyObjs.Choice();
                 c1.id = storyNode.id + "_" + idNum;
                 c1.text = text;
                 c1.parentNodeId = storyNode.id;
                 return c1;
             }
 
-            var storyNode = new storyObjs.StoryNode(id);
+            var storyNode = storyObjs.StoryNode();
             storyNode.title = title;
-            storyNode.copy = copy;
+            storyNode.text = copy;
 
 
             if (choice1) {

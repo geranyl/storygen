@@ -2,7 +2,8 @@ var fs = require('fs'),
     path = require('path'),
     __parentDir = path.dirname(module.parent.filename),
     render = require('../routes/index.js'),
-    dataModel = require('./datamodel.js').DataModel;
+    dataModel = require('./datamodel.js').DataModel,
+    chartData = require('./chart.js');
 
 
 var JSONHandler = {
@@ -40,7 +41,7 @@ var JSONHandler = {
                 dataModel.createModel(data);
 
 
-                render.renderHome(req, res, data.items); //TODO: callback this instead of a permanent action
+                render.renderHome(req, res, chartData.render(data)); //TODO: callback this instead of a permanent action
 
 
             }
