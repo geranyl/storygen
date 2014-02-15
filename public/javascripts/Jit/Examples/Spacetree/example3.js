@@ -1,132 +1,37 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Story Gen</title>
-    <link rel='stylesheet' href='/stylesheets/style.css'/>
-    <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
-    <script src="javascripts/handlebars.js"></script>
-    <script src="stylesheets/bootstrap/js/bootstrap.js"></script>
-
-    <script src="javascripts/Jit/jit.js"></script>
-
-
-</head>
-<body onload="init();">
-
-<div class="container">
-    <div class="col-md-12">
-        <h1>Story Generator</h1>
-    </div>
-
-    {{>part}}
-
-
-    {{>stories}}
-
-
-</div>
-
-<div id="chart">
-    {{>chart}}
-</div>
-
-
-<!--http://tilomitra.com/handlebars-on-the-server-and-client/-->
-<!-- Add a \ before the handlebars -->
-<script id="node-template" type="text/x-handlebars-template">
-    {{#if parentNodeId}}
-    <div class="sg-choice">
-        <div><strong>Id: </strong><span data-attr="choiceId">\{{id}}</span></div>
-        <div><strong>Parent Node Id: </strong><span data-attr="pId">\{{parentNodeId}}</span></div>
-        <div><strong>Child Node Id: </strong><span data-attr="cId">\{{nextNodeId}}</span></div>
-        <div data-attr="desc">\{{text}}</div>
-    </div>
-    {{else}}
-
-    <div class="sg-node">
-        <div><strong>Id:</strong> <span data-attr="nodeId">\{{id}}</span></div>
-        <div><strong>Day: </strong><span data-attr="day">\{{day}}</span></div>
-        <div><strong>Title: </strong><span data-attr="title">\{{title}}</span></div>
-        <div data-attr="desc">\{{text}}</div>
-    </div>
-    {{/if}}
-
-</script>
-
-<div id="infovis" class="clearfix"></div>
-<div id="log"></div>
-<div id="right-container">
-
-    <h4>Add Subtrees</h4>
-    <table>
-        <tbody><tr>
-            <td>
-                Animate:
-            </td>
-            <td>
-                <input type="checkbox" checked="checked" id="animate">
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <input type="button" value="Add" id="addSubtree">
-            </td>
-            <td>
-                <input type="button" onclick="window.location = window.location" value="Refresh">
-            </td>
-        </tr>
-        </tbody></table>
-
-</div>
-
-<script>
-
 var labelType, useGradients, nativeTextSupport, animate;
 
 (function() {
-    var ua = navigator.userAgent,
-            iStuff = ua.match(/iPhone/i) || ua.match(/iPad/i),
-            typeOfCanvas = typeof HTMLCanvasElement,
-            nativeCanvasSupport = (typeOfCanvas == 'object' || typeOfCanvas == 'function'),
-            textSupport = nativeCanvasSupport
-                    && (typeof document.createElement('canvas').getContext('2d').fillText == 'function');
-    //I'm setting this based on the fact that ExCanvas provides text support for IE
-    //and that as of today iPhone/iPad current text support is lame
-    labelType = (!nativeCanvasSupport || (textSupport && !iStuff))? 'Native' : 'HTML';
-    nativeTextSupport = labelType == 'Native';
-    useGradients = nativeCanvasSupport;
-    animate = !(iStuff || !nativeCanvasSupport);
+  var ua = navigator.userAgent,
+      iStuff = ua.match(/iPhone/i) || ua.match(/iPad/i),
+      typeOfCanvas = typeof HTMLCanvasElement,
+      nativeCanvasSupport = (typeOfCanvas == 'object' || typeOfCanvas == 'function'),
+      textSupport = nativeCanvasSupport 
+        && (typeof document.createElement('canvas').getContext('2d').fillText == 'function');
+  //I'm setting this based on the fact that ExCanvas provides text support for IE
+  //and that as of today iPhone/iPad current text support is lame
+  labelType = (!nativeCanvasSupport || (textSupport && !iStuff))? 'Native' : 'HTML';
+  nativeTextSupport = labelType == 'Native';
+  useGradients = nativeCanvasSupport;
+  animate = !(iStuff || !nativeCanvasSupport);
 })();
 
 var Log = {
-    elem: false,
-    write: function(text){
-        if (!this.elem)
-            this.elem = document.getElementById('log');
-        this.elem.innerHTML = text;
-        this.elem.style.left = (500 - this.elem.offsetWidth / 2) + 'px';
-    }
+  elem: false,
+  write: function(text){
+    if (!this.elem) 
+      this.elem = document.getElementById('log');
+    this.elem.innerHTML = text;
+    this.elem.style.left = (500 - this.elem.offsetWidth / 2) + 'px';
+  }
 };
 
 
 function init(){
-
-
-var html =  getHTML();
-
-    function getHTML(data){
-        var source   = $("#node-template").html();
-        var template =  Handlebars.compile(source);
-        var html = template(data);
-        return html;
-    }
-
-
     //init data
     var json = {
         id: "node02",
         name: "0.2",
-        data: {title: "This is a title"},
+        data: {},
         children: [{
             id: "node13",
             name: "1.3",
@@ -858,31 +763,27 @@ var html =  getHTML();
     //end
     var removing = false;
     //init Spacetree
-
-
-
     //Create a new ST instance
     var st = new $jit.ST({
-        orientation: 'top',
         'injectInto': 'infovis',
         //add styles/shapes/colors
         //to nodes and edges
-
+        
         //set overridable=true if you want
-        //to set styles for nodes individually
+        //to set styles for nodes individually 
         Node: {
-            overridable: true,
-            width: 400,
-            height: 100,
-            color: '#ccc'
+          overridable: true,
+          width: 60,
+          height: 20,
+          color: '#ccc'
         },
         //change the animation/transition effect
         transition: $jit.Trans.Quart.easeOut,
-
+        
         onBeforeCompute: function(node){
             Log.write("loading " + node.name);
         },
-
+        
         onAfterCompute: function(node){
             Log.write("done");
         },
@@ -899,14 +800,10 @@ var html =  getHTML();
             style.color = '#333';
             style.fontSize = '0.8em';
             style.textAlign = 'center';
-            style.width = "400px";
-            style.height = "100px";
-
-
-
-
-            label.innerHTML = getHTML(node);
-            //Delete the specified subtree
+            style.width = "60px";
+            style.height = "20px";
+            label.innerHTML = node.name;
+            //Delete the specified subtree 
             //when clicking on a label.
             //Only apply this method for nodes
             //in the first level of the tree.
@@ -915,13 +812,13 @@ var html =  getHTML();
                 label.onclick = function() {
                     if(!removing) {
                         removing = true;
-                        Log.write("removing subtree...");
+                        Log.write("removing subtree...");  
                         //remove the subtree
                         st.removeSubtree(label.id, true, 'animate', {
                             hideLabels: false,
                             onComplete: function() {
-                                removing = false;
-                                Log.write("subtree removed");
+                              removing = false;
+                              Log.write("subtree removed");   
                             }
                         });
                     }
@@ -929,7 +826,7 @@ var html =  getHTML();
             };
         },
         //This method is triggered right before plotting a node.
-        //This method is useful for adding style
+        //This method is useful for adding style 
         //to a node before it's being rendered.
         onBeforePlotNode: function(node) {
             if (node._depth == 1) {
@@ -946,7 +843,7 @@ var html =  getHTML();
     //Emulate a click on the root node.
     st.onClick(st.root);
     //end
-
+    
     //init handler
     //Add an event handler to the add button for
     //adding a subtree.
@@ -955,7 +852,7 @@ var html =  getHTML();
     addButton.onclick = function() {
         var type = animate.checked? "animate" : "replot";
         subtree.id = "node02";
-        Log.write("adding subtree...");
+        Log.write("adding subtree...");  
         //add the subtree
         st.addSubtree(subtree, type, {
             hideLabels: false,
@@ -966,13 +863,3 @@ var html =  getHTML();
     };
     //end
 }
-
-
-
-</script>
-
-
-</body>
-
-
-</html>

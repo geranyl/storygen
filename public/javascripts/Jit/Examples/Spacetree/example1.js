@@ -1,132 +1,37 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Story Gen</title>
-    <link rel='stylesheet' href='/stylesheets/style.css'/>
-    <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
-    <script src="javascripts/handlebars.js"></script>
-    <script src="stylesheets/bootstrap/js/bootstrap.js"></script>
-
-    <script src="javascripts/Jit/jit.js"></script>
-
-
-</head>
-<body onload="init();">
-
-<div class="container">
-    <div class="col-md-12">
-        <h1>Story Generator</h1>
-    </div>
-
-    {{>part}}
-
-
-    {{>stories}}
-
-
-</div>
-
-<div id="chart">
-    {{>chart}}
-</div>
-
-
-<!--http://tilomitra.com/handlebars-on-the-server-and-client/-->
-<!-- Add a \ before the handlebars -->
-<script id="node-template" type="text/x-handlebars-template">
-    {{#if parentNodeId}}
-    <div class="sg-choice">
-        <div><strong>Id: </strong><span data-attr="choiceId">\{{id}}</span></div>
-        <div><strong>Parent Node Id: </strong><span data-attr="pId">\{{parentNodeId}}</span></div>
-        <div><strong>Child Node Id: </strong><span data-attr="cId">\{{nextNodeId}}</span></div>
-        <div data-attr="desc">\{{text}}</div>
-    </div>
-    {{else}}
-
-    <div class="sg-node">
-        <div><strong>Id:</strong> <span data-attr="nodeId">\{{id}}</span></div>
-        <div><strong>Day: </strong><span data-attr="day">\{{day}}</span></div>
-        <div><strong>Title: </strong><span data-attr="title">\{{title}}</span></div>
-        <div data-attr="desc">\{{text}}</div>
-    </div>
-    {{/if}}
-
-</script>
-
-<div id="infovis" class="clearfix"></div>
-<div id="log"></div>
-<div id="right-container">
-
-    <h4>Add Subtrees</h4>
-    <table>
-        <tbody><tr>
-            <td>
-                Animate:
-            </td>
-            <td>
-                <input type="checkbox" checked="checked" id="animate">
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <input type="button" value="Add" id="addSubtree">
-            </td>
-            <td>
-                <input type="button" onclick="window.location = window.location" value="Refresh">
-            </td>
-        </tr>
-        </tbody></table>
-
-</div>
-
-<script>
-
 var labelType, useGradients, nativeTextSupport, animate;
 
 (function() {
-    var ua = navigator.userAgent,
-            iStuff = ua.match(/iPhone/i) || ua.match(/iPad/i),
-            typeOfCanvas = typeof HTMLCanvasElement,
-            nativeCanvasSupport = (typeOfCanvas == 'object' || typeOfCanvas == 'function'),
-            textSupport = nativeCanvasSupport
-                    && (typeof document.createElement('canvas').getContext('2d').fillText == 'function');
-    //I'm setting this based on the fact that ExCanvas provides text support for IE
-    //and that as of today iPhone/iPad current text support is lame
-    labelType = (!nativeCanvasSupport || (textSupport && !iStuff))? 'Native' : 'HTML';
-    nativeTextSupport = labelType == 'Native';
-    useGradients = nativeCanvasSupport;
-    animate = !(iStuff || !nativeCanvasSupport);
+  var ua = navigator.userAgent,
+      iStuff = ua.match(/iPhone/i) || ua.match(/iPad/i),
+      typeOfCanvas = typeof HTMLCanvasElement,
+      nativeCanvasSupport = (typeOfCanvas == 'object' || typeOfCanvas == 'function'),
+      textSupport = nativeCanvasSupport 
+        && (typeof document.createElement('canvas').getContext('2d').fillText == 'function');
+  //I'm setting this based on the fact that ExCanvas provides text support for IE
+  //and that as of today iPhone/iPad current text support is lame
+  labelType = (!nativeCanvasSupport || (textSupport && !iStuff))? 'Native' : 'HTML';
+  nativeTextSupport = labelType == 'Native';
+  useGradients = nativeCanvasSupport;
+  animate = !(iStuff || !nativeCanvasSupport);
 })();
 
 var Log = {
-    elem: false,
-    write: function(text){
-        if (!this.elem)
-            this.elem = document.getElementById('log');
-        this.elem.innerHTML = text;
-        this.elem.style.left = (500 - this.elem.offsetWidth / 2) + 'px';
-    }
+  elem: false,
+  write: function(text){
+    if (!this.elem) 
+      this.elem = document.getElementById('log');
+    this.elem.innerHTML = text;
+    this.elem.style.left = (500 - this.elem.offsetWidth / 2) + 'px';
+  }
 };
 
 
 function init(){
-
-
-var html =  getHTML();
-
-    function getHTML(data){
-        var source   = $("#node-template").html();
-        var template =  Handlebars.compile(source);
-        var html = template(data);
-        return html;
-    }
-
-
     //init data
     var json = {
         id: "node02",
         name: "0.2",
-        data: {title: "This is a title"},
+        data: {},
         children: [{
             id: "node13",
             name: "1.3",
@@ -854,86 +759,109 @@ var html =  getHTML();
             }]
         }]
     };
-    var subtree = json.children.pop();
     //end
-    var removing = false;
     //init Spacetree
-
-
-
     //Create a new ST instance
     var st = new $jit.ST({
-        orientation: 'top',
-        'injectInto': 'infovis',
-        //add styles/shapes/colors
-        //to nodes and edges
-
-        //set overridable=true if you want
-        //to set styles for nodes individually
-        Node: {
-            overridable: true,
-            width: 400,
-            height: 100,
-            color: '#ccc'
+        //id of viz container element
+        injectInto: 'infovis',
+        //set duration for the animation
+        duration: 800,
+        //set animation transition type
+        transition: $jit.Trans.Quart.easeInOut,
+        //set distance between node and its children
+        levelDistance: 50,
+        //enable panning
+        Navigation: {
+          enable:true,
+          panning:true
         },
-        //change the animation/transition effect
-        transition: $jit.Trans.Quart.easeOut,
-
+        //set node and edge styles
+        //set overridable=true for styling individual
+        //nodes or edges
+        Node: {
+            height: 20,
+            width: 60,
+            type: 'rectangle',
+            color: '#aaa',
+            overridable: true
+        },
+        
+        Edge: {
+            type: 'bezier',
+            overridable: true
+        },
+        
         onBeforeCompute: function(node){
             Log.write("loading " + node.name);
         },
-
-        onAfterCompute: function(node){
+        
+        onAfterCompute: function(){
             Log.write("done");
         },
-
-        //This method is triggered on label
-        //creation. This means that for each node
-        //this method is triggered only once.
-        //This method is useful for adding event
-        //handlers to each node label.
+        
+        //This method is called on DOM label creation.
+        //Use this method to add event handlers and styles to
+        //your node.
         onCreateLabel: function(label, node){
-            //add some styles to the node label
+            label.id = node.id;            
+            label.innerHTML = node.name;
+            label.onclick = function(){
+            	if(normal.checked) {
+            	  st.onClick(node.id);
+            	} else {
+                st.setRoot(node.id, 'animate');
+            	}
+            };
+            //set label styles
             var style = label.style;
-            label.id = node.id;
+            style.width = 60 + 'px';
+            style.height = 17 + 'px';            
+            style.cursor = 'pointer';
             style.color = '#333';
             style.fontSize = '0.8em';
-            style.textAlign = 'center';
-            style.width = "400px";
-            style.height = "100px";
-
-
-
-
-            label.innerHTML = getHTML(node);
-            //Delete the specified subtree
-            //when clicking on a label.
-            //Only apply this method for nodes
-            //in the first level of the tree.
-            if(node._depth == 1) {
-                style.cursor = 'pointer';
-                label.onclick = function() {
-                    if(!removing) {
-                        removing = true;
-                        Log.write("removing subtree...");
-                        //remove the subtree
-                        st.removeSubtree(label.id, true, 'animate', {
-                            hideLabels: false,
-                            onComplete: function() {
-                                removing = false;
-                                Log.write("subtree removed");
-                            }
-                        });
-                    }
-                }
-            };
+            style.textAlign= 'center';
+            style.paddingTop = '3px';
         },
-        //This method is triggered right before plotting a node.
-        //This method is useful for adding style
-        //to a node before it's being rendered.
-        onBeforePlotNode: function(node) {
-            if (node._depth == 1) {
-                node.data.$color = '#f77';
+        
+        //This method is called right before plotting
+        //a node. It's useful for changing an individual node
+        //style properties before plotting it.
+        //The data properties prefixed with a dollar
+        //sign will override the global node style properties.
+        onBeforePlotNode: function(node){
+            //add some color to the nodes in the path between the
+            //root node and the selected node.
+            if (node.selected) {
+                node.data.$color = "#ff7";
+            }
+            else {
+                delete node.data.$color;
+                //if the node belongs to the last plotted level
+                if(!node.anySubnode("exist")) {
+                    //count children number
+                    var count = 0;
+                    node.eachSubnode(function(n) { count++; });
+                    //assign a node color based on
+                    //how many children it has
+                    node.data.$color = ['#aaa', '#baa', '#caa', '#daa', '#eaa', '#faa'][count];                    
+                }
+            }
+        },
+        
+        //This method is called right before plotting
+        //an edge. It's useful for changing an individual edge
+        //style properties before plotting it.
+        //Edge data proprties prefixed with a dollar sign will
+        //override the Edge global style properties.
+        onBeforePlotLine: function(adj){
+            if (adj.nodeFrom.selected && adj.nodeTo.selected) {
+                adj.data.$color = "#eed";
+                adj.data.$lineWidth = 3;
+            }
+            else {
+                delete adj.data.$color;
+                delete adj.data.$lineWidth;
             }
         }
     });
@@ -943,36 +871,29 @@ var html =  getHTML();
     st.compute();
     //optional: make a translation of the tree
     st.geom.translate(new $jit.Complex(-200, 0), "current");
-    //Emulate a click on the root node.
+    //emulate a click on the root node.
     st.onClick(st.root);
     //end
-
-    //init handler
-    //Add an event handler to the add button for
-    //adding a subtree.
-    var animate = document.getElementById('animate');
-    var addButton = document.getElementById('addSubtree');
-    addButton.onclick = function() {
-        var type = animate.checked? "animate" : "replot";
-        subtree.id = "node02";
-        Log.write("adding subtree...");
-        //add the subtree
-        st.addSubtree(subtree, type, {
-            hideLabels: false,
-            onComplete: function() {
-                Log.write("subtree added");
-            }
-        });
+    //Add event handlers to switch spacetree orientation.
+    var top = $jit.id('r-top'), 
+        left = $jit.id('r-left'), 
+        bottom = $jit.id('r-bottom'), 
+        right = $jit.id('r-right'),
+        normal = $jit.id('s-normal');
+        
+    
+    function changeHandler() {
+        if(this.checked) {
+            top.disabled = bottom.disabled = right.disabled = left.disabled = true;
+            st.switchPosition(this.value, "animate", {
+                onComplete: function(){
+                    top.disabled = bottom.disabled = right.disabled = left.disabled = false;
+                }
+            });
+        }
     };
+    
+    top.onchange = left.onchange = bottom.onchange = right.onchange = changeHandler;
     //end
+
 }
-
-
-
-</script>
-
-
-</body>
-
-
-</html>

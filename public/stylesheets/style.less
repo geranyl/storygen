@@ -1,15 +1,13 @@
 @import "bootstrap/css/bootstrap.css";
 
-
-
-.node{
+.sg-node {
   width: 400px;
   padding: 10px;
   border: solid 1px #333;
   margin: 50px auto;
 }
 
-.choice{
+.sg-choice {
   width: 400px;
   padding: 10px;
   border: solid 1px #e95e11;
@@ -17,7 +15,7 @@
   display: inline-block;
 }
 
-.choice:nth-child(odd){
+.sg-choice:nth-child(odd) {
   &:before,
   &:after {
     content: " "; /* 1 */
@@ -27,4 +25,15 @@
   &:after {
     clear: both;
   }
+}
+
+#infovis {
+  height: 1000px;
+  margin: auto;
+  position: relative;
+  width: 1000px;
+}
+
+.jit-autoadjust-label {
+  padding: 15px;
 }
