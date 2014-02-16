@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <script src="javascripts/jquery.min.js"></script>
+</head>
+<body>
+
+</body>
+
+
+<script>
+
+    var json = {items: [
+        {
+            id: "1",
+            choices: [
+                {id: "1_0", next: "2", parent: "1"},
+                {id: "1_1", next: "5", parent: "1"}
+            ]
+        },
+        {
+            id: "2",
+            choices: [
+                {id: "2_0", next: "8", parent: "2"}
+            ]
+        },
+        {
+            id: "5",
+            choices: [
+                {id: "5_0", next: "6", parent: "5"},
+                {id: "5_1", next: "7", parent: "5"}
+            ]
+        },
+        {
+            id: "6",
+            choices: []
+        },
+        {
+            id: "7",
+            choices: []
+        },
+        {
+            id: "8",
+            choices: []
+        }
+    ]
+    };
+
+
+    var length = json.items.length,
+            i = 0,
+            nodes = [],
+            choices = [];
+
+    for (i; i < length; i++) {
+        var node = json.items[i];
+        nodes.push(node);
+
+        for (var m = 0; m < node.choices.length; m++) {
+            choices.push(node.choices[m]);
+        }
+
+
+    }
+
+    console.log(nodes);
+    console.log(choices)
+
+    var newJson={items:[]};
+
+
+
+    getNext(nodes[0], newJson.items);
+
+
+    function getNext(arrNode, node){
+
+        var parent = arrNode;
+        parent.children = [];
+        node.push(parent);
+
+
+        for (var m= 0; m<arrNode.choices.length; m++){
+            var choice = arrNode.choices[m];
+            parent.children.push(choice);
+            choice.children = [];
+            var next = getNode(arrNode.choices[m].next);
+            getNext(next, choice.children);
+        }
+
+
+        return newJson;
+
+    }
+
+
+
+    function getNode(nodeId){
+        for (var index in nodes){
+            if(nodes[index].id == nodeId){
+                var foundNode = nodes[index];
+                return foundNode;
+            }
+        }
+        return null;
+    }
+
+
+
+</script>
+
+
+</html>

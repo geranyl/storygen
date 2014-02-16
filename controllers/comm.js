@@ -1,28 +1,33 @@
-var io,
-    socket,
-    self = this;
+var localIo,
 
-function init(io, cb){
-    self.io = io;
+    tries = 0;
+
+function init(io){
+    localIo = io;
     io.sockets.on('connection', function (socket) {
 
-        self.socket = socket;
+
         socket.emit('news', { hello: 'world' });
         socket.on('my other event', function (data) {
             console.log(data);
         });
 
-        cb();
+
     });
 }
 
 
 function send(eventName, data) {
-    if(socket){
-        socket.emit('news')
-    }
+
+
+    localIo.sockets.on('connection', function(socket){
+        socket.emit('news', data);
+    })
+
+
 }
 
 
 
 exports.init = init;
+exports.send = send;

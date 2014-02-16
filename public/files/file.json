@@ -20,24 +20,30 @@
             "copy": "fasfa"
         },
         {
+          "id":3,
+          "choices":[]
+        },
+        {
             "id": 2,
             "choices": [
                 {
                     "id": "1_0",
                     "text": "sdfadf",
-                    "parentNodeId": 2
+                    "parentNodeId": 2,
+                    "nextNodeId":4
                 },
                 {
                     "id": "1_1",
                     "text": "asdfad",
-                    "parentNodeId": 2
+                    "parentNodeId": 2,
+                    "nextNodeId": 5
                 }
             ],
             "title": "adfa",
             "copy": "adfa"
         },
         {
-            "id": 0,
+            "id": 4,
             "day": -1,
             "title": "sdfs",
             "text": "",
@@ -45,7 +51,7 @@
             "copy": ""
         },
         {
-            "id": 3,
+            "id": 5,
             "day": -1,
             "title": "",
             "text": "",

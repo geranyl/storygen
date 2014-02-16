@@ -9,20 +9,20 @@ var DataModel = {
     createModel: function (data) {
         //this is where we load in our data and create a model in array form (temp storage as json)
         this.currentData = data;
-
-        var length = this.currentData.items.length, i = 0;
-        for (i; i < length; i += 1) {
-            var nodeJSON = this.currentData.items[i];
-            //TODO: might want to do story objects as objects and use object.create etc. - keep as json
-            var node = new storyObjs.StoryNode(nodeJSON.id);
-            for (var key in nodeJSON){
-                if(node.hasOwnProperty(key)){
-                    node[key] = nodeJSON[key];
-                }
-            }
-
-            console.dir(node)
-        }
+//
+//        var length = this.currentData.items.length, i = 0;
+//        for (i; i < length; i += 1) {
+//            var nodeJSON = this.currentData.items[i];
+//            //TODO: might want to do story objects as objects and use object.create etc. - keep as json
+//            var node = new storyObjs.StoryNode(nodeJSON.id);
+//            for (var key in nodeJSON){
+//                if(node.hasOwnProperty(key)){
+//                    node[key] = nodeJSON[key];
+//                }
+//            }
+//
+////            console.dir(node)
+//        }
 
 
     },

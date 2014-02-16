@@ -15,10 +15,6 @@ var JSONHandler = {
                 console.log(err);
             } else {
                 console.log("The file was saved!");
-
-
-
-
             }
         });
     },

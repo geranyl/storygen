@@ -38,20 +38,17 @@ if ('development' == app.get('env')) {
 }
 
 
-app.get('/', routes.index);
-app.get('/users', user.list);
-app.put('/', postHandler.processForm);
+    app.get('/', routes.index);
+    app.get('/users', user.list);
+    app.put('/', postHandler.processForm);
 
 
-comm.init(io, function(){
-   console.log('hi there')
-});
+comm.init(io);
+
 
 server.listen(app.get('port'), function(){
-    console.log('Express server listening on port ' + app.get('port'));
+  console.log('Express server listening on port ' + app.get('port'));
 });
-
-
 
 
 

@@ -1,21 +1,15 @@
 
 //pass in data as normal json
+var converter = require('./convert.js'),
+    comm = require('./comm.js');
+
 function render(data){
-    var chartData = [];
+    var newJson = converter.convert(data);
+    console.log('render')
+    console.dir(newJson)
 
-    for (var index in data.items){
-        var item = data.items[index];
-        var choices = item.choices;
-        delete item.choices;
-        chartData.push(item);
-        for (var choiceIndex in choices){
-            chartData.push(choices[choiceIndex]);
-        }
-    }
+    comm.send('news',newJson);
 
-    console.log('chart data')
-    console.dir(chartData)
-    return chartData;
 }
 
 exports.render = render;
