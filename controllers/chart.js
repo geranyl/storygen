@@ -8,7 +8,7 @@ function render(data){
     console.log('render')
     console.dir(newJson)
 
-    comm.send('news',newJson);
+    comm.send('graph',newJson);
 
 }
 

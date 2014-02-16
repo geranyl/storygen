@@ -9,18 +9,10 @@
 
     <script src="javascripts/Jit/jit.js"></script>
     <script src="/socket.io/socket.io.js"></script>
-    <script>
-        var socket = io.connect('http://localhost:3000');
-        socket.on('news', function (data) {
-            console.log('in socket front')
-            console.log(data);
-            socket.emit('my other event', { my: 'data' });
-        });
-    </script>
 
 
 </head>
-<body onload="init();">
+<body>
 
 <div class="container">
     <div class="col-md-12">
@@ -43,14 +35,14 @@
 <!--http://tilomitra.com/handlebars-on-the-server-and-client/-->
 <!-- Add a \ before the handlebars -->
 <script id="node-template" type="text/x-handlebars-template">
-    {{#if parentNodeId}}
+    \{{#if type}}
     <div class="sg-choice">
         <div><strong>Id: </strong><span data-attr="choiceId">\{{id}}</span></div>
         <div><strong>Parent Node Id: </strong><span data-attr="pId">\{{parentNodeId}}</span></div>
         <div><strong>Child Node Id: </strong><span data-attr="cId">\{{nextNodeId}}</span></div>
         <div data-attr="desc">\{{text}}</div>
     </div>
-    {{else}}
+    \{{else}}
 
     <div class="sg-node">
         <div><strong>Id:</strong> <span data-attr="nodeId">\{{id}}</span></div>
@@ -58,7 +50,7 @@
         <div><strong>Title: </strong><span data-attr="title">\{{title}}</span></div>
         <div data-attr="desc">\{{text}}</div>
     </div>
-    {{/if}}
+    \{{/if}}
 
 </script>
 
@@ -90,7 +82,12 @@
 
 </div>
 
+<div id="temp" style="opacity: 0;"></div>
+
 <script>
+
+
+    var st;
 
     var labelType, useGradients, nativeTextSupport, animate;
 
@@ -120,173 +117,166 @@
     };
 
 
-    function init() {
+    function getHTML(data) {
+        var source = $("#node-template").html();
+        var template = Handlebars.compile(source);
+        var html = template(data);
+        return html;
+    }
 
 
-        var html = getHTML();
-
-        function getHTML(data) {
-            var source = $("#node-template").html();
-            var template = Handlebars.compile(source);
-            var html = template(data);
-            return html;
-        }
+    function init(json) {
 
 
-        //init data
-        var json = {
-            id: "node02",
-            name: "0.2",
-            data: {},
-            children: [
-                {
-                    id: "node13",
-                    name: "1.3",
-                    data: {},
-                    children: [
-                        {
-                            id: "node24",
-                            name: "2.4",
-                            data: {},
-                            children: [
-                                {
-                                    id: "node35",
-                                    name: "3.5",
-                                    data: {},
-                                    children: [
-                                        {
-                                            id: "node46",
-                                            name: "4.6",
-                                            data: {},
-                                            children: []
-                                        }
-                                    ]
-                                }
-                            ]
-                        }
-                    ]
-                },
-                {  id: "node12",
-                    name: "1.6",
-                    data: {},
-                    children: []}
-            ]
 
-        };
+
 
         //end
         var removing = false;
         //init Spacetree
 
-
-        //Create a new ST instance
-        var st = new $jit.ST({
-            orientation: 'top',
-            injectInto: 'infovis',
-            //add styles/shapes/colors
-            //to nodes and edges
-
-            //set overridable=true if you want
-            //to set styles for nodes individually
-            Node: {
-                overridable: true,
-//            autoWidth: true,
-//            autoHeight: true,
-                width: 400,
-                height: 150,
-                color: '#ff0000'
-            },
-            //change the animation/transition effect
-            transition: $jit.Trans.Quart.easeOut,
-
-            onBeforeCompute: function (node) {
-                Log.write("loading " + node.name);
-            },
-
-            onAfterCompute: function (node) {
-                Log.write("done");
-            },
-
-            //This method is triggered on label
-            //creation. This means that for each node
-            //this method is triggered only once.
-            //This method is useful for adding event
-            //handlers to each node label.
-            onCreateLabel: function (label, node) {
-                //add some styles to the node label
-                var style = label.style;
-                label.id = node.id;
-                style.color = '#333';
-                style.fontSize = '0.8em';
-                style.textAlign = 'center';
-                style.width = '400px';
+        if(!st){
 
 
-                label.innerHTML = getHTML(node);
-                //Delete the specified subtree
-                //when clicking on a label.
-                //Only apply this method for nodes
-                //in the first level of the tree.
-                if (node._depth == 1) {
-                    style.cursor = 'pointer';
-                    label.onclick = function () {
-                        if (!removing) {
-                            removing = true;
-                            Log.write("removing subtree...");
-                            //remove the subtree
-                            st.removeSubtree(label.id, true, 'animate', {
-                                hideLabels: false,
-                                onComplete: function () {
-                                    removing = false;
-                                    Log.write("subtree removed");
-                                }
-                            });
-                        }
-                    }
-                }
-                ;
-            },
-            //This method is triggered right before plotting a node.
-            //This method is useful for adding style
-            //to a node before it's being rendered.
-            onBeforePlotNode: function (node) {
-                if (node._depth == 1) {
-                    node.data.$color = '#f77';
-                }
-            }
-        });
-        //load json data
-        st.loadJSON(json);
-        //compute node positions and layout
-        st.compute();
-        //optional: make a translation of the tree
-//    st.geom.translate(new $jit.Complex(-200, 0), "current");
-        //Emulate a click on the root node.
-        st.onClick(st.root);
-        //end
 
-        //init handler
-        //Add an event handler to the add button for
-        //adding a subtree.
-        var animate = document.getElementById('animate');
-        var addButton = document.getElementById('addSubtree');
-        addButton.onclick = function () {
-            var type = animate.checked ? "animate" : "replot";
-            var subtree = json.children.pop();
-            subtree.id = "node02";
-            Log.write("adding subtree...");
-            //add the subtree
-            st.addSubtree(subtree, type, {
-                hideLabels: false,
-                onComplete: function () {
-                    Log.write("subtree added");
+            //Create a new ST instance
+            st = new $jit.ST({
+                orientation: 'left', //when top it won't render past the first level - blargh
+                injectInto: 'infovis',
+                //add styles/shapes/colors
+                //to nodes and edges
+
+                //set overridable=true if you want
+                //to set styles for nodes individually
+                Node: {
+                    overridable: true,
+    //                autoWidth: true,
+    //                autoHeight: true,
+                    width: 400,
+                    height: 150,
+                    color: '#cccccc'
+                },
+                Navigation: {
+                    enable:true,
+                    panning:true
+                },
+                //change the animation/transition effect
+                transition: $jit.Trans.Quart.easeOut,
+
+                onBeforeCompute: function (node) {
+                    Log.write("loading " + node.name);
+                },
+
+                onAfterCompute: function (node) {
+                    Log.write("done");
+                },
+
+                //This method is triggered on label
+                //creation. This means that for each node
+                //this method is triggered only once.
+                //This method is useful for adding event
+                //handlers to each node label.
+                onCreateLabel: function (label, node) {
+                    console.log(node.id)
+                    //add some styles to the node label
+                    var style = label.style;
+                    label.id = node.id;
+                    style.color = '#333';
+                    style.fontSize = '0.8em';
+                    style.textAlign = 'left';
+
+
+                    label.innerHTML = getHTML(node.data);
+
+                    //Delete the specified subtree
+                    //when clicking on a label.
+                    //Only apply this method for nodes
+                    //in the first level of the tree.
+                    if (node._depth == 1) {
+//                        style.cursor = 'pointer';
+//                        label.onclick = function () {
+//                            if (!removing) {
+//                                removing = true;
+//                                Log.write("removing subtree...");
+//                                //remove the subtree
+//                                st.removeSubtree(label.id, true, 'animate', {
+//                                    hideLabels: false,
+//                                    onComplete: function () {
+//                                        removing = false;
+//                                        Log.write("subtree removed");
+//                                    }
+//                                });
+//                            }
+//                        }
+                    };
+                },
+                //This method is triggered right before plotting a node.
+                //This method is useful for adding style
+                //to a node before it's being rendered.
+                onBeforePlotNode: function (node) {
+
+
+
+    //                if (node._depth == 1) {
+    //                    node.data.$color = '#f77';
+    //                }
+                },
+                onAfterPlotNode: function (node) {
                 }
             });
-        };
+            //load json data
+            st.loadJSON(json);
+            //compute node positions and layout
+            st.compute();
+            //optional: make a translation of the tree
+    //    st.geom.translate(new $jit.Complex(-200, 0), "current");
+            //Emulate a click on the root node.
+            st.onClick(st.root);
+            //end
+
+            //init handler
+            //Add an event handler to the add button for
+            //adding a subtree.
+            var animate = document.getElementById('animate');
+            var addButton = document.getElementById('addSubtree');
+//            addButton.onclick = function () {
+//                var type = animate.checked ? "animate" : "replot";
+//                var subtree = json.children.pop();
+//                subtree.id = "node02";
+//                Log.write("adding subtree...");
+//                //add the subtree
+//                st.addSubtree(subtree, type, {
+//                    hideLabels: false,
+//                    onComplete: function () {
+//                        Log.write("subtree added");
+//                    }
+//                });
+//            };
+        }else{
+            console.log('refreshing')
+            st.refresh();
+        }
         //end
+
+
     }
 
 
+    //TODO: if tree exits, append only
+    //TODO: tie next node to choice
+</script>
+
+
+<script>
+    var socket = io.connect('http://localhost:3000');
+    socket.on('news', function (data) {
+        console.log(data);
+        socket.emit('my other event', { my: 'data' });
+    });
+    socket.on('graph', function (data) {
+        console.log(data)
+        init(data.items[0]);
+    });
 </script>
 
 

@@ -5,56 +5,61 @@
             "choices": [
                 {
                     "id": "0_0",
-                    "text": "asdfasdfadf asfda f",
+                    "text": "Choice 1 Text",
+                    "type": 1,
                     "parentNodeId": 1,
-                    "nextNodeId":2
+                    "nextNodeId": 2
                 },
                 {
                     "id": "0_1",
-                    "text": "asdfasdfasfa fdsafdsaf",
+                    "text": "Choice 2 Text",
                     "parentNodeId": 1,
-                    "nextNodeId":3
+                    "type": 1,
+                    "nextNodeId": 3
                 }
             ],
-            "title": "sdfs",
-            "copy": "fasfa"
+            "title": "Title 1",
+            "text": "Copy for 1"
         },
         {
-          "id":3,
-          "choices":[]
+            "id": 3,
+            "title": "my title 3",
+            "text": "my text 3",
+            "choices": []
         },
         {
             "id": 2,
             "choices": [
                 {
                     "id": "1_0",
-                    "text": "sdfadf",
+                    "text": "Choice text",
                     "parentNodeId": 2,
-                    "nextNodeId":4
+                    "type": 1,
+                    "nextNodeId": 4
                 },
                 {
                     "id": "1_1",
-                    "text": "asdfad",
+                    "text": "More choice text",
                     "parentNodeId": 2,
+                    "type": 1,
                     "nextNodeId": 5
                 }
             ],
-            "title": "adfa",
-            "copy": "adfa"
+            "title": "Node 2 title",
+            "text": " Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean feugiat ante quis dolor blandit, vel vehicula lorem iaculis. Integer vel nisi sed libero dictum euismod. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Aliquam non augue vehicula lectus sodales commodo ut at massa. In at diam a magna euismod viverra. Maecenas bibendum turpis ut vestibulum dictum. Nunc ullamcorper nunc ante, non adipiscing leo hendrerit varius. Sed sit amet porta sapien. Etiam bibendum elit accumsan nisl molestie venenatis."
         },
         {
             "id": 4,
             "day": -1,
-            "title": "sdfs",
-            "text": "",
-            "choices": [],
-            "copy": ""
+            "title": "Node 4 title",
+            "text": "text for 4",
+            "choices": []
         },
         {
             "id": 5,
             "day": -1,
-            "title": "",
-            "text": "",
+            "title": "Node 5 title",
+            "text": "text for 5",
             "choices": []
         }
     ]

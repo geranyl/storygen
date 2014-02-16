@@ -37,6 +37,7 @@ function createChoiceNode(){
     return {
         id: -1, //maybe NodeID_choice#
         text: '',
+        type: 1, //for handlebars
         parentNodeId: -1, //a StoryNode
         nextNodeId: -1
     }
@@ -61,10 +62,13 @@ function convertFromJSON(json, proto){
     return nn;
 }
 
-
+function setStart(val){
+    storyId = parseInt(val,10) + 1;
+}
 
 
 exports.StoryNode = createStoryNode;
 exports.Choice = createChoiceNode;
 exports.convert = convertFromJSON;
+exports.setStart = setStart;
 

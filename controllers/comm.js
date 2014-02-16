@@ -21,7 +21,7 @@ function send(eventName, data) {
 
 
     localIo.sockets.on('connection', function(socket){
-        socket.emit('news', data);
+        socket.emit(eventName, data);
     })
 
 

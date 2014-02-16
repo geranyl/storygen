@@ -1,17 +1,21 @@
 @import "bootstrap/css/bootstrap.css";
 .sg-node {
   width: 400px;
-  padding: 10px;
+  padding: 10px 40px;
   border: solid 1px #333;
+  overflow-y: scroll;
+  height: 150px;
 }
 .sg-choice {
   width: 400px;
-  padding: 10px;
-  border: solid 1px #e95e11;
+  padding: 10px 40px;
+  border: solid 2px #e95e11;
+  overflow-y: scroll;
+  height: 150px;
 }
 #infovis {
-  height: 1000px;
+  height: 5000px;
   margin: auto;
   position: relative;
-  width: 1000px;
+  width: 1200px;
 }

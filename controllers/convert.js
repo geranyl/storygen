@@ -1,15 +1,14 @@
-
 var nodes = [],
     choices = [],
-    newJson={items:[]};
+    newJson = {items: []};
 
 
 //convert to flow chart form
-function convert(json){
+function convert(json) {
     var length = json.items.length,
         i = 0;
 
-console.log('in convert', length)
+    console.log('in convert', length)
     for (i; i < length; i++) {
         var node = json.items[i];
         nodes.push(node);
@@ -24,19 +23,15 @@ console.log('in convert', length)
 }
 
 
+function getNext(arrNode, node) {
 
-
-
-
-function getNext(arrNode, node){
-
-    var parent = arrNode;
+    var parent = convertToChartNode(arrNode);
     parent.children = [];
     node.push(parent);
 
 
-    for (var m= 0; m<arrNode.choices.length; m++){
-        var choice = arrNode.choices[m];
+    for (var m = 0; m < arrNode.choices.length; m++) {
+        var choice = convertToChartNode(arrNode.choices[m]);
         parent.children.push(choice);
         choice.children = [];
         var next = getNode(arrNode.choices[m].nextNodeId);
@@ -49,10 +44,25 @@ function getNext(arrNode, node){
 }
 
 
+function convertToChartNode(node) {
+    var chartNode = {};
+    chartNode.data = {};
+    for (var key in node) {
 
-function getNode(nodeId){
-    for (var index in nodes){
-        if(nodes[index].id == nodeId){
+        chartNode.data[key] = node[key];
+        if (key == "id") {
+            console.log('id', key)
+            chartNode.id = node.id;
+        }
+
+    }
+    return chartNode;
+}
+
+
+function getNode(nodeId) {
+    for (var index in nodes) {
+        if (nodes[index].id == nodeId) {
             var foundNode = nodes[index];
             return foundNode;
         }
