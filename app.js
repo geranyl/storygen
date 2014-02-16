@@ -3,15 +3,18 @@
  * Module dependencies.
  */
 
-var express = require('express');
-var hbrs = require('express3-handlebars');
-var routes = require('./routes');
-var user = require('./routes/user');
-var http = require('http');
-var path = require('path');
-var postHandler = require('./controllers/posthandler.js').PostHandler;
+var express = require('express'),
+    hbrs = require('express3-handlebars'),
+    routes = require('./routes'),
+    user = require('./routes/user'),
+    http = require('http'),
+    path = require('path'),
+    postHandler = require('./controllers/posthandler.js').PostHandler,
+    app = express(),
+    server = http.createServer(app),
+    io = require('socket.io').listen(server),
+    comm = require('./controllers/comm.js');
 
-var app = express();
 app.engine('html', hbrs({extname:'.html'}));
 
 // all environments
@@ -34,12 +37,21 @@ if ('development' == app.get('env')) {
   app.use(express.errorHandler());
 }
 
+
 app.get('/', routes.index);
 app.get('/users', user.list);
 app.put('/', postHandler.processForm);
 
 
-http.createServer(app).listen(app.get('port'), function(){
-  console.log('Express server listening on port ' + app.get('port'));
+comm.init(io, function(){
+   console.log('hi there')
 });
+
+server.listen(app.get('port'), function(){
+    console.log('Express server listening on port ' + app.get('port'));
+});
+
+
+
+
 

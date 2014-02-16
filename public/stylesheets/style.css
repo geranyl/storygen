@@ -3,31 +3,15 @@
   width: 400px;
   padding: 10px;
   border: solid 1px #333;
-  margin: 50px auto;
 }
 .sg-choice {
   width: 400px;
   padding: 10px;
   border: solid 1px #e95e11;
-  margin: 50px;
-  display: inline-block;
-}
-.sg-choice:nth-child(odd):before,
-.sg-choice:nth-child(odd):after {
-  content: " ";
-  /* 1 */
-  display: table;
-  /* 2 */
-}
-.sg-choice:nth-child(odd):after {
-  clear: both;
 }
 #infovis {
   height: 1000px;
   margin: auto;
   position: relative;
   width: 1000px;
-}
-.jit-autoadjust-label {
-  padding: 15px;
 }

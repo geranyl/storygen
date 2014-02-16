@@ -5,20 +5,7 @@ var jsonHandler = require ('../controllers/jsonhandler.js').JSONHandler;
 
 
 exports.index = function(req, res){
-
-    var rawString = {
-        "heah": "blah1",
-        "yes": ["yes1", "yes2"],
-        "no": {
-            "maybe": "maybe"
-        }
-    }
-
-
     jsonHandler.readJSON(req, res);
-
-   // jsonHandler.writeJSON(req, res, rawString);
-
 };
 
 exports.renderHome = function(req, res, data){
