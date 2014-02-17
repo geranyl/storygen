@@ -2,20 +2,19 @@
 
 
 
+
 .sg-node {
-  width: 400px;
+  width: 300px;
   padding: 10px 40px;
   border: solid 1px #333;
   overflow-y: scroll;
+//  overflow: hidden;
   height: 150px;
 }
 
-.sg-choice {
-  width: 400px;
-  padding: 10px 40px;
+.sg-choice:extend(.sg-node) {
+
   border: solid 2px #e95e11;
-  overflow-y: scroll;
-  height: 150px;
 }
 
 
@@ -25,5 +24,7 @@
   margin: auto;
   position: relative;
   width: 1200px;
+  border: solid 1px #333;
+  overflow: hidden;
 }
 

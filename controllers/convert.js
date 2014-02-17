@@ -51,7 +51,6 @@ function convertToChartNode(node) {
 
         chartNode.data[key] = node[key];
         if (key == "id") {
-            console.log('id', key)
             chartNode.id = node.id;
         }
 

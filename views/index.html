@@ -141,8 +141,10 @@
 
             //Create a new ST instance
             st = new $jit.ST({
-                orientation: 'left', //when top it won't render past the first level - blargh
+                orientation: 'top', //when top it won't render past the first level - blargh
                 injectInto: 'infovis',
+                constrained: false, //doesn't seem to override anything - it's supposed to show the whole graph
+                levelsToShow: 20,
                 //add styles/shapes/colors
                 //to nodes and edges
 
@@ -152,7 +154,7 @@
                     overridable: true,
     //                autoWidth: true,
     //                autoHeight: true,
-                    width: 400,
+                    width:300,
                     height: 150,
                     color: '#cccccc'
                 },

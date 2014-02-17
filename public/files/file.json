@@ -4,14 +4,14 @@
             "id": 1,
             "choices": [
                 {
-                    "id": "0_0",
+                    "id": "1_0",
                     "text": "Choice 1 Text",
                     "type": 1,
                     "parentNodeId": 1,
                     "nextNodeId": 2
                 },
                 {
-                    "id": "0_1",
+                    "id": "1_1",
                     "text": "Choice 2 Text",
                     "parentNodeId": 1,
                     "type": 1,
@@ -31,14 +31,14 @@
             "id": 2,
             "choices": [
                 {
-                    "id": "1_0",
+                    "id": "2_0",
                     "text": "Choice text",
                     "parentNodeId": 2,
                     "type": 1,
                     "nextNodeId": 4
                 },
                 {
-                    "id": "1_1",
+                    "id": "2_1",
                     "text": "More choice text",
                     "parentNodeId": 2,
                     "type": 1,
