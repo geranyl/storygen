@@ -2,7 +2,7 @@
 .sg-node,
 .sg-choice {
   width: 300px;
-  padding: 10px 40px;
+  padding: 10px 40px 10px 10px;
   border: solid 1px #333;
   overflow-y: scroll;
   height: 150px;

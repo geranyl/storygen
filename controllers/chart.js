@@ -1,15 +1,15 @@
 
 //pass in data as normal json
-var converter = require('./convert.js'),
-    comm = require('./comm.js');
+var converter = require('./convert.js');
 
-function render(data){
+function convert(data){
     var newJson = converter.convert(data);
     console.log('render')
     console.dir(newJson)
 
-    comm.send('graph',newJson);
+
+    return newJson;
 
 }
 
-exports.render = render;
+exports.convert = convert;

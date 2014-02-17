@@ -1,6 +1,5 @@
 var localIo,
-
-    tries = 0;
+    state = require('./state.js');
 
 function init(io){
     localIo = io;
@@ -8,8 +7,11 @@ function init(io){
 
 
         socket.emit('news', { hello: 'world' });
-        socket.on('my other event', function (data) {
-            console.log(data);
+
+        socket.on('choiceClicked', function (data) {
+           //TODO: move this out of here - events instead
+            state.setChoice(data.choice);
+
         });
 
 
@@ -18,13 +20,9 @@ function init(io){
 
 
 function send(eventName, data) {
-
-
     localIo.sockets.on('connection', function(socket){
         socket.emit(eventName, data);
     })
-
-
 }
 
 

@@ -2,8 +2,7 @@ var fs = require('fs'),
     path = require('path'),
     __parentDir = path.dirname(module.parent.filename),
     render = require('../routes/index.js'),
-    dataModel = require('./datamodel.js').DataModel,
-    chartData = require('./chart.js');
+    dataModel = require('./datamodel.js').DataModel;
 
 
 var JSONHandler = {
@@ -15,6 +14,7 @@ var JSONHandler = {
                 console.log(err);
             } else {
                 console.log("The file was saved!");
+                callback();
             }
         });
     },
@@ -37,7 +37,7 @@ var JSONHandler = {
                 dataModel.createModel(data);
 
 
-                render.renderHome(req, res, chartData.render(data)); //TODO: callback this instead of a permanent action
+                render.renderHome(req, res); //TODO: callback this instead of a permanent action
 
 
             }

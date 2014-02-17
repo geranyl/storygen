@@ -1,75 +1,376 @@
-[
-    {
-        "items": [
-            {
-                "data": {
-                    "id": 1
-                },
+{
+    "items": [
+        {
+            "data": {
                 "id": 1,
-                "children": [
+                "choices": [
                     {
-                        "data": {
-                            "id": "1_0"
-                        },
                         "id": "1_0",
-                        "children": [
-                            {
-                                "data": {
-                                    "id": 2
-                                },
-                                "id": 2,
-                                "children": [
-                                    {
-                                        "data": {
-                                            "id": "2_0"
-                                        },
-                                        "id": "2_0",
-                                        "children": [
-                                            {
-                                                "data": {
-                                                    "id": 4
-                                                },
-                                                "id": 4,
-                                                "children": []
-                                            }
-                                        ]
-                                    },
-                                    {
-                                        "data": {
-                                            "id": "2_1"
-                                        },
-                                        "id": "2_1",
-                                        "children": [
-                                            {
-                                                "data": {
-                                                    "id": 5
-                                                },
-                                                "id": 5,
-                                                "children": []
-                                            }
-                                        ]
-                                    }
-                                ]
-                            }
-                        ]
+                        "text": "Choice 1 Text",
+                        "type": 1,
+                        "parentNodeId": 1,
+                        "nextNodeId": 2
                     },
                     {
-                        "data": {
-                            "id": "1_1"
-                        },
                         "id": "1_1",
-                        "children": [
-                            {
-                                "data": {
-                                    "id": 3
-                                },
-                                "id": 3,
-                                "children": []
-                            }
-                        ]
+                        "text": "Choice 2 Text",
+                        "parentNodeId": 1,
+                        "type": 1,
+                        "nextNodeId": 3
                     }
-                ]
-            }
-        ]
-    }
-]
+                ],
+                "title": "Title 1",
+                "text": "Copy for 1"
+            },
+            "id": 1,
+            "children": [
+                {
+                    "data": {
+                        "id": "1_0",
+                        "text": "Choice 1 Text",
+                        "type": 1,
+                        "parentNodeId": 1,
+                        "nextNodeId": 2
+                    },
+                    "id": "1_0",
+                    "children": [
+                        {
+                            "data": {
+                                "id": 2,
+                                "choices": [
+                                    {
+                                        "id": "2_0",
+                                        "text": "Choice text",
+                                        "parentNodeId": 2,
+                                        "type": 1,
+                                        "nextNodeId": 6
+                                    },
+                                    {
+                                        "id": "2_1",
+                                        "text": "More choice text",
+                                        "parentNodeId": 2,
+                                        "type": 1,
+                                        "nextNodeId": 5
+                                    }
+                                ],
+                                "title": "Node 2 title",
+                                "text": " Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean feugiat ante quis dolor blandit, vel vehicula lorem iaculis. Integer vel nisi sed libero dictum euismod. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Aliquam non augue vehicula lectus sodales commodo ut at massa. In at diam a magna euismod viverra. Maecenas bibendum turpis ut vestibulum dictum. Nunc ullamcorper nunc ante, non adipiscing leo hendrerit varius. Sed sit amet porta sapien. Etiam bibendum elit accumsan nisl molestie venenatis."
+                            },
+                            "id": 2,
+                            "children": [
+                                {
+                                    "data": {
+                                        "id": "2_0",
+                                        "text": "Choice text",
+                                        "parentNodeId": 2,
+                                        "type": 1,
+                                        "nextNodeId": 6
+                                    },
+                                    "id": "2_0",
+                                    "children": [
+                                        {
+                                            "data": {
+                                                "id": 6,
+                                                "day": -1,
+                                                "title": "adsfa",
+                                                "text": "adfa",
+                                                "choices": [
+                                                    {
+                                                        "id": "6_0",
+                                                        "text": "asdf",
+                                                        "type": 1,
+                                                        "parentNodeId": 6,
+                                                        "nextNodeId": 7
+                                                    },
+                                                    {
+                                                        "id": "6_1",
+                                                        "text": "asdf",
+                                                        "type": 1,
+                                                        "parentNodeId": 6,
+                                                        "nextNodeId": -1
+                                                    }
+                                                ]
+                                            },
+                                            "id": 6,
+                                            "children": [
+                                                {
+                                                    "data": {
+                                                        "id": "6_0",
+                                                        "text": "asdf",
+                                                        "type": 1,
+                                                        "parentNodeId": 6,
+                                                        "nextNodeId": -1
+                                                    },
+                                                    "id": "6_0",
+                                                    "children": []
+                                                },
+                                                {
+                                                    "data": {
+                                                        "id": "6_1",
+                                                        "text": "asdf",
+                                                        "type": 1,
+                                                        "parentNodeId": 6,
+                                                        "nextNodeId": -1
+                                                    },
+                                                    "id": "6_1",
+                                                    "children": []
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    "data": {
+                                        "id": "2_1",
+                                        "text": "More choice text",
+                                        "parentNodeId": 2,
+                                        "type": 1,
+                                        "nextNodeId": 5
+                                    },
+                                    "id": "2_1",
+                                    "children": [
+                                        {
+                                            "data": {
+                                                "id": 5,
+                                                "day": -1,
+                                                "title": "Node 5 title",
+                                                "text": "text for 5",
+                                                "choices": []
+                                            },
+                                            "id": 5,
+                                            "children": []
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "data": {
+                        "id": "1_1",
+                        "text": "Choice 2 Text",
+                        "parentNodeId": 1,
+                        "type": 1,
+                        "nextNodeId": 3
+                    },
+                    "id": "1_1",
+                    "children": [
+                        {
+                            "data": {
+                                "id": 3,
+                                "title": "my title 3",
+                                "text": "my text 3",
+                                "choices": []
+                            },
+                            "id": 3,
+                            "children": []
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "data": {
+                "id": 1,
+                "choices": [
+                    {
+                        "id": "1_0",
+                        "text": "Choice 1 Text",
+                        "type": 1,
+                        "parentNodeId": 1,
+                        "nextNodeId": 2
+                    },
+                    {
+                        "id": "1_1",
+                        "text": "Choice 2 Text",
+                        "parentNodeId": 1,
+                        "type": 1,
+                        "nextNodeId": 3
+                    }
+                ],
+                "title": "Title 1",
+                "text": "Copy for 1"
+            },
+            "id": 1,
+            "children": [
+                {
+                    "data": {
+                        "id": "1_0",
+                        "text": "Choice 1 Text",
+                        "type": 1,
+                        "parentNodeId": 1,
+                        "nextNodeId": 2
+                    },
+                    "id": "1_0",
+                    "children": [
+                        {
+                            "data": {
+                                "id": 2,
+                                "choices": [
+                                    {
+                                        "id": "2_0",
+                                        "text": "Choice text",
+                                        "parentNodeId": 2,
+                                        "type": 1,
+                                        "nextNodeId": 6
+                                    },
+                                    {
+                                        "id": "2_1",
+                                        "text": "More choice text",
+                                        "parentNodeId": 2,
+                                        "type": 1,
+                                        "nextNodeId": 5
+                                    }
+                                ],
+                                "title": "Node 2 title",
+                                "text": " Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean feugiat ante quis dolor blandit, vel vehicula lorem iaculis. Integer vel nisi sed libero dictum euismod. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Aliquam non augue vehicula lectus sodales commodo ut at massa. In at diam a magna euismod viverra. Maecenas bibendum turpis ut vestibulum dictum. Nunc ullamcorper nunc ante, non adipiscing leo hendrerit varius. Sed sit amet porta sapien. Etiam bibendum elit accumsan nisl molestie venenatis."
+                            },
+                            "id": 2,
+                            "children": [
+                                {
+                                    "data": {
+                                        "id": "2_0",
+                                        "text": "Choice text",
+                                        "parentNodeId": 2,
+                                        "type": 1,
+                                        "nextNodeId": 6
+                                    },
+                                    "id": "2_0",
+                                    "children": [
+                                        {
+                                            "data": {
+                                                "id": 6,
+                                                "day": -1,
+                                                "title": "adsfa",
+                                                "text": "adfa",
+                                                "choices": [
+                                                    {
+                                                        "id": "6_0",
+                                                        "text": "asdf",
+                                                        "type": 1,
+                                                        "parentNodeId": 6,
+                                                        "nextNodeId": 7
+                                                    },
+                                                    {
+                                                        "id": "6_1",
+                                                        "text": "asdf",
+                                                        "type": 1,
+                                                        "parentNodeId": 6,
+                                                        "nextNodeId": -1
+                                                    }
+                                                ]
+                                            },
+                                            "id": 6,
+                                            "children": [
+                                                {
+                                                    "data": {
+                                                        "id": "6_0",
+                                                        "text": "asdf",
+                                                        "type": 1,
+                                                        "parentNodeId": 6,
+                                                        "nextNodeId": 7
+                                                    },
+                                                    "id": "6_0",
+                                                    "children": [
+                                                        {
+                                                            "data": {
+                                                                "id": 7,
+                                                                "day": -1,
+                                                                "title": "Hello",
+                                                                "text": "something",
+                                                                "choices": [
+                                                                    {
+                                                                        "id": "7_0",
+                                                                        "text": "a choice",
+                                                                        "type": 1,
+                                                                        "parentNodeId": 7,
+                                                                        "nextNodeId": -1
+                                                                    }
+                                                                ]
+                                                            },
+                                                            "id": 7,
+                                                            "children": [
+                                                                {
+                                                                    "data": {
+                                                                        "id": "7_0",
+                                                                        "text": "a choice",
+                                                                        "type": 1,
+                                                                        "parentNodeId": 7,
+                                                                        "nextNodeId": -1
+                                                                    },
+                                                                    "id": "7_0",
+                                                                    "children": []
+                                                                }
+                                                            ]
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "data": {
+                                                        "id": "6_1",
+                                                        "text": "asdf",
+                                                        "type": 1,
+                                                        "parentNodeId": 6,
+                                                        "nextNodeId": -1
+                                                    },
+                                                    "id": "6_1",
+                                                    "children": []
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    "data": {
+                                        "id": "2_1",
+                                        "text": "More choice text",
+                                        "parentNodeId": 2,
+                                        "type": 1,
+                                        "nextNodeId": 5
+                                    },
+                                    "id": "2_1",
+                                    "children": [
+                                        {
+                                            "data": {
+                                                "id": 5,
+                                                "day": -1,
+                                                "title": "Node 5 title",
+                                                "text": "text for 5",
+                                                "choices": []
+                                            },
+                                            "id": 5,
+                                            "children": []
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "data": {
+                        "id": "1_1",
+                        "text": "Choice 2 Text",
+                        "parentNodeId": 1,
+                        "type": 1,
+                        "nextNodeId": 3
+                    },
+                    "id": "1_1",
+                    "children": [
+                        {
+                            "data": {
+                                "id": 3,
+                                "title": "my title 3",
+                                "text": "my text 3",
+                                "choices": []
+                            },
+                            "id": 3,
+                            "children": []
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

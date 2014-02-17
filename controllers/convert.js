@@ -8,7 +8,6 @@ function convert(json) {
     var length = json.items.length,
         i = 0;
 
-    console.log('in convert', length)
     for (i; i < length; i++) {
         var node = json.items[i];
         nodes.push(node);
@@ -18,8 +17,7 @@ function convert(json) {
     }
 
 
-    var rtnVal = getNext(nodes[0], newJson.items);
-    return rtnVal;
+    return getNext(nodes[0], newJson.items);
 }
 
 
@@ -35,7 +33,9 @@ function getNext(arrNode, node) {
         parent.children.push(choice);
         choice.children = [];
         var next = getNode(arrNode.choices[m].nextNodeId);
-        getNext(next, choice.children);
+        if (next) {
+            getNext(next, choice.children);
+        }
     }
 
 

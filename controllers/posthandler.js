@@ -3,10 +3,7 @@
  */
 
 var render = require('../routes/index.js'),
-
-    dataModel = require('./datamodel.js').DataModel,
-
-    chartFormatter = require('./chart.js');
+    dataModel = require('./datamodel.js').DataModel;
 
 var PostHandler = {
     processForm: function(req, res){
@@ -22,12 +19,11 @@ var PostHandler = {
         //if node doesn't exist yet in the data model, create it, otherwise update it
 
 
-        dataModel.addStoryNode(req.body.nodeId, req.body.title, req.body.copy, req.body.choice1, req.body.choice2);
+        dataModel.addStoryNode(req.body.nodeId, req.body.title, req.body.copy, req.body.choice1, req.body.choice2, function(){
+            render.renderHome(req, res);
+        });
 
-        var data = chartFormatter.render(dataModel.currentData);
 
-
-        render.renderHome(req, res, data);
     }
 }
 

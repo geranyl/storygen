@@ -67,8 +67,13 @@ function setStart(val){
 }
 
 
+function getId(){
+    return storyId;
+}
+
 exports.StoryNode = createStoryNode;
 exports.Choice = createChoiceNode;
 exports.convert = convertFromJSON;
 exports.setStart = setStart;
+exports.getCurId = getId;
 

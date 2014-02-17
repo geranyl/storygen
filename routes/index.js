@@ -1,4 +1,8 @@
-var jsonHandler = require ('../controllers/jsonhandler.js').JSONHandler;
+var jsonHandler = require ('../controllers/jsonhandler.js').JSONHandler,
+    dataModel = require('../controllers/datamodel.js').DataModel,
+    state = require('../controllers/state.js'),
+    chartFormatter = require('../controllers/chart.js'),
+    comm = require('../controllers/comm.js');
 /*
  * GET home page.
  */
@@ -8,14 +12,26 @@ exports.index = function(req, res){
     jsonHandler.readJSON(req, res);
 };
 
-exports.renderHome = function(req, res, data){
+exports.renderHome = function(req, res){
 
-   res.locals.chart = data;
+    var newData = chartFormatter.convert(dataModel.currentData);
+    console.dir(dataModel.currentData)
 
-    //if chart data
-    //res.locals.chart = [{"title":"hello"}, {"text":"some stuff", "parentNodeId":"1"}];
-    res.render('index', {
+    var curState = state.getState();
 
+    for (var key in curState){
+        newData[key] = curState[key];
+    }
+
+    res.locals.data = newData;
+
+    //if callback need to send back the html
+    res.render('index', {title: 'home'}, function(err, html){
+
+        console.log('done rendering')
+//        console.dir(newData)
+        res.send(html);
+        comm.send('graph',newData);
 
     });
 }

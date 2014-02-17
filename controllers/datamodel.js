@@ -1,5 +1,6 @@
 var jh = require('./jsonhandler.js'),
-    storyObjs = require('./storyobjs.js');
+    storyObjs = require('./storyobjs.js'),
+    state = require('./state.js');
 
 
 var DataModel = {
@@ -25,13 +26,13 @@ var DataModel = {
 
     },
 
-    addStoryNode: function (id, title, copy, choice1, choice2) {
+    addStoryNode: function (id, title, copy, choice1, choice2, cb) {
 
-
-        if (id && this.getStoryNode(id)) {
-            //update the node
-        } else {
-            //create a new one
+//
+//        if (id && this.getStoryNode(id)) {
+//            //update the node
+//        } else {
+//            //create a new one
 
 
             function createChoiceNode(idNum, text, parentNodeId) {
@@ -56,18 +57,81 @@ var DataModel = {
 
             this.currentData.items.push(storyNode);
 
-        }
+            //get the choice that was picked to start this node from
+            var choice = state.getChoice();
+            if(choice){
+                console.log('choice exists')
+                console.dir(choice);
+                console.log('\n\n\n')
+                choice.nextNodeId = storyNode.id;
+                this.updateModel(choice);
+                state.setChoice(null);
+            }
+
+//        }
+        console.log('done updating model')
 
         //write the new node to json
-        this.writeToJSON();
+        this.writeToJSON(cb);
     },
-    writeToJSON: function () {
-        jh.JSONHandler.writeJSON(this.currentData);
+    writeToJSON: function (cb) {
+        jh.JSONHandler.writeJSON(this.currentData, cb);
     },
-    getStoryNode: function (id) {
-        //TODO: implement finding a story node
+    getNode: function (id) {
+
+        var items = this.currentData.items;
+
+        for (var key in items){
+            var item = items[key];
+            if(item.id == id){
+                return item;
+            }
+            for (var choice in item.choices){
+                var curChoice = item.choices[choice];
+                if(curChoice.id == id){
+                    return curChoice;
+                }
+            }
+        }
+
+
         return null;
+    },
+    updateModel: function(nodeJson){
+        var id = nodeJson.id;
+
+        var items = this.currentData.items;
+
+        for (var key in items){
+            var item = items[key];
+            if(item.id == id){
+                this.copyProps(nodeJson, item);
+                break;
+            }
+            for (var choice in item.choices){
+                var curChoice = item.choices[choice];
+                if(curChoice.id == id){
+                    this.copyProps(nodeJson, curChoice);
+                    break;
+                }
+            }
+        }
+
+    },
+    isEmpty: function(){
+        if(this.currentData.items.length == 0){
+            return true;
+        }
+        return false;
+    },
+    copyProps:function (nodeJson, item){ //copy props from nodeJson to item
+        for (var prop in nodeJson){
+            if(item.hasOwnProperty(prop)){
+                item[prop] = nodeJson[prop];
+            }
+        }
     }
+
 }
 
 
