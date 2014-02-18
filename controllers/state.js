@@ -9,7 +9,7 @@ function getState() {
 
     var obj = {};
     obj.newNodeId = storyObjs.getCurId();
-    obj.disabled = !dm.DataModel.isEmpty || choiceBeingAddedTo ? false : true;
+    obj.disabled = dm.DataModel.isEmpty() || choiceBeingAddedTo ? false : true;
     obj.dayNum = 2;
 
     if(choiceBeingAddedTo){

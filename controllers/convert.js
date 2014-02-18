@@ -24,7 +24,10 @@ function convert(json) {
     }
 
 
-    return getNext(nodes[0], newJson.items);
+    if(nodes.length){
+        return getNext(nodes[0], newJson.items);
+    }
+    return newJson;
 }
 
 

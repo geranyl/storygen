@@ -1,6 +1,7 @@
 var jh = require('./jsonhandler.js'),
     storyObjs = require('./storyobjs.js'),
-    state = require('./state.js');
+    state = require('./state.js'),
+    deleteUtil = require('./deleteutil.js');
 
 
 var DataModel = {
@@ -122,21 +123,7 @@ var DataModel = {
 
     removeNode: function(id){
         console.log('removing', id)
-        for (var i=0; i<this.currentData.items.length; i++){
-            var item = this.currentData.items[i];
-            if(item.id == id){
-                console.log('actually removing', id)
-                this.currentData.items.splice(i, 1);
-                i--;
-                for (var k = 0; k<item.choices.length; k++){
-                    return this.removeNode(item.choices[k].nextNodeId);
-                }
-            }
-        }
-
-
-        return true;
-
+        deleteUtil.deleteItem(this.currentData, id);
     },
 
     updateModel: function(nodeJson){
@@ -161,7 +148,9 @@ var DataModel = {
 
     },
     isEmpty: function(){
+        console.log('is this empty?', this.currentData.items.length)
         if(this.currentData.items.length == 0){
+            storyObjs.setStart(0);
             return true;
         }
         return false;
