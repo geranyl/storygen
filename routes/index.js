@@ -18,6 +18,7 @@ exports.renderHome = function(req, res){
     var newData = chartFormatter.convert(dataModel.currentData);
     console.log('rendering home page')
 
+
     var curState = state.getState();
 
     for (var key in curState){

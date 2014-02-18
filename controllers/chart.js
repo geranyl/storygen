@@ -2,8 +2,8 @@
 //pass in data as normal json
 var converter = require('./convert.js');
 
-function convert(data){
-    var newJson = converter.convert(data);
+function convert(data, cb){
+    var newJson = converter.convert(data, cb);
     return newJson;
 }
 

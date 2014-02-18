@@ -119,6 +119,26 @@ var DataModel = {
 
         return null;
     },
+
+    removeNode: function(id){
+        console.log('removing', id)
+        for (var i=0; i<this.currentData.items.length; i++){
+            var item = this.currentData.items[i];
+            if(item.id == id){
+                console.log('actually removing', id)
+                this.currentData.items.splice(i, 1);
+                i--;
+                for (var k = 0; k<item.choices.length; k++){
+                    return this.removeNode(item.choices[k].nextNodeId);
+                }
+            }
+        }
+
+
+        return true;
+
+    },
+
     updateModel: function(nodeJson){
         var id = nodeJson.id;
 

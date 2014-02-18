@@ -12,9 +12,12 @@ function init(io){
             state.setChoice(data.choice);
         });
         socket.on('fetchGraph', function(data){
+            console.log('fetching');
+            console.dir(dataModel.DataModel.currentData)
 
             if(dataModel.DataModel.currentData.items)
-                socket.emit('graph', chartFormatter.convert(dataModel.DataModel.currentData));
+                var newJson = chartFormatter.convert(dataModel.DataModel.currentData);
+                socket.emit('graph', newJson);
         });
 
     });

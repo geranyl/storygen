@@ -1,4 +1,4 @@
-var st;
+
 
 var labelType, useGradients, nativeTextSupport, animate;
 
@@ -17,18 +17,26 @@ var labelType, useGradients, nativeTextSupport, animate;
     animate = !(iStuff || !nativeCanvasSupport);
 })();
 
-var Log = {
-    elem: false,
-    write: function (text) {
-        if (!this.elem)
-            this.elem = document.getElementById('log');
-        this.elem.innerHTML = text;
-        this.elem.style.left = (500 - this.elem.offsetWidth / 2) + 'px';
-    }
-};
 
+
+
+
+
+
+$(document).ready(function(){
+   $('#yes').on('click', function(){
+       //modal yes clicked
+       console.log('yeS')
+       $('#myModal').modal('hide');
+
+
+
+       $('#hiddenSubmit').click();
+   });
+});
 
 var socket;
+var st;
 
 function setSocket(io) {
     socket = io;
@@ -106,11 +114,11 @@ function init(json) {
             transition: $jit.Trans.Quart.easeOut,
 
             onBeforeCompute: function (node) {
-                Log.write("loading " + node.name);
+//                Log.write("loading " + node.name);
             },
 
             onAfterCompute: function (node) {
-                Log.write("done");
+//                Log.write("done");
             },
 
 //This method is triggered on label
@@ -135,29 +143,22 @@ function init(json) {
                 //Only apply this method for nodes
                 //in the first level of the tree.
                 if (node._depth % 2 != 0) {
+                    //is a choice node
                     style.cursor = 'pointer';
                     label.onclick = function () {
                         var curChoice = label.id;
                         console.log(curChoice)
 
                         socket.emit('choiceClicked', { choice: curChoice });
-
-
-//                            if (!removing) {
-//                                removing = true;
-//                                Log.write("removing subtree...");
-//                                //remove the subtree
-//                                st.removeSubtree(label.id, true, 'animate', {
-//                                    hideLabels: false,
-//                                    onComplete: function () {
-//                                        removing = false;
-//                                        Log.write("subtree removed");
-//                                    }
-//                                });
-//                            }
+                    }
+                } else {
+                    //is a story node
+                    style.cursor = 'pointer';
+                    label.onclick = function() {
+                        $('#nodeToDelete').attr('value', label.id);
+                        $('#myModal').modal('show');
                     }
                 }
-                ;
             },
 //This method is triggered right before plotting a node.
 //This method is useful for adding style

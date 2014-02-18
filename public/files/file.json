@@ -23,10 +23,9 @@
         },
         {
             "id": 3,
-            "title": "NEW",
+            "title": "my title 3",
             "text": "my text 3",
-            "choices": [],
-            "copy": ""
+            "choices": []
         },
         {
             "id": 2,

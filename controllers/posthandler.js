@@ -15,14 +15,25 @@ var PostHandler = {
 //        console.log(req.body.choice2)
 
         console.dir(req.body)
+        if(req.body.delete){
+            //deleting a node
+            console.log('deleting  A NODE')
+
+            var rtnVal = dataModel.removeNode(req.body.nodeId);
+
+            dataModel.writeToJSON(function(){render.renderHome(req, res)});
+
+        }else{
+
+            //if node doesn't exist yet in the data model, create it, otherwise update it
 
 
-        //if node doesn't exist yet in the data model, create it, otherwise update it
+            dataModel.addStoryNode(req.body.newnode, req.body.title, req.body.text, req.body.choice1, req.body.choice2, function(){
+                render.renderHome(req, res);
+            });
 
+        }
 
-        dataModel.addStoryNode(req.body.newnode, req.body.title, req.body.text, req.body.choice1, req.body.choice2, function(){
-            render.renderHome(req, res);
-        });
 
 
     }

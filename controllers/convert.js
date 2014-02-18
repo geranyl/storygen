@@ -1,11 +1,17 @@
-var nodes = [],
-    choices = [],
-    newJson;
+var nodes,
+    choices,
+    newJson,
+    processedNodes;
 
 
 //convert to flow chart form
 function convert(json) {
-    newJson =  {items: []};
+    newJson = {items: []};
+    nodes = [];
+    choices = [];
+    processedNodes = [];
+
+
     var length = json.items.length,
         i = 0;
 
@@ -23,7 +29,6 @@ function convert(json) {
 
 
 function getNext(arrNode, node) {
-
     var parent = convertToChartNode(arrNode);
     parent.children = [];
     node.push(parent);
@@ -39,9 +44,16 @@ function getNext(arrNode, node) {
         }
     }
 
+    if (processedNodes.indexOf(parent.id) == -1) {
+        processedNodes.push(parent.id);
+    }
 
-    return newJson;
 
+
+    if(processedNodes.length == nodes.length){
+        console.log('returning chart json');
+        return newJson;
+    }
 }
 
 
