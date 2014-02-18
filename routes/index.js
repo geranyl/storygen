@@ -15,7 +15,7 @@ exports.index = function(req, res){
 exports.renderHome = function(req, res){
 
     var newData = chartFormatter.convert(dataModel.currentData);
-    console.dir(dataModel.currentData)
+    console.log('rendering home page')
 
     var curState = state.getState();
 
@@ -28,10 +28,10 @@ exports.renderHome = function(req, res){
     //if callback need to send back the html
     res.render('index', {title: 'home'}, function(err, html){
 
-        console.log('done rendering')
+
 //        console.dir(newData)
         res.send(html);
-        comm.send('graph',newData);
+        console.log('done rendering')
 
     });
 }

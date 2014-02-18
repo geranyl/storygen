@@ -60,9 +60,6 @@ var DataModel = {
             //get the choice that was picked to start this node from
             var choice = state.getChoice();
             if(choice){
-                console.log('choice exists')
-                console.dir(choice);
-                console.log('\n\n\n')
                 choice.nextNodeId = storyNode.id;
                 this.updateModel(choice);
                 state.setChoice(null);

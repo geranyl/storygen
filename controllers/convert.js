@@ -1,10 +1,11 @@
 var nodes = [],
     choices = [],
-    newJson = {items: []};
+    newJson;
 
 
 //convert to flow chart form
 function convert(json) {
+    newJson =  {items: []};
     var length = json.items.length,
         i = 0;
 

@@ -8,11 +8,11 @@ var render = require('../routes/index.js'),
 var PostHandler = {
     processForm: function(req, res){
 
-        console.log(req.body.nodeId)
-        console.log(req.body.title)
-        console.log(req.body.copy)
-        console.log(req.body.choice1)
-        console.log(req.body.choice2)
+//        console.log(req.body.nodeId)
+//        console.log(req.body.title)
+//        console.log(req.body.copy)
+//        console.log(req.body.choice1)
+//        console.log(req.body.choice2)
 
 
 

@@ -36,7 +36,7 @@ var JSONHandler = {
 
                 dataModel.createModel(data);
 
-
+console.log('read json')
                 render.renderHome(req, res); //TODO: callback this instead of a permanent action
 
 

@@ -1,31 +1,29 @@
-var localIo,
-    state = require('./state.js');
+var state = require('./state.js'),
+    dataModel = require('./datamodel.js').DataModel,
+    chartFormatter = require('./chart.js');
 
+
+var count = 0;
 function init(io){
-    localIo = io;
     io.sockets.on('connection', function (socket) {
-
-
-        socket.emit('news', { hello: 'world' });
-
         socket.on('choiceClicked', function (data) {
            //TODO: move this out of here - events instead
             state.setChoice(data.choice);
-
         });
+        socket.on('fetchGraph', function(data){
 
+            for (var key in dataModel.currentData.items){
+                console.dir(dataModel.currentData.items[key])
+            }
+
+            socket.emit('graph', {data: count});
+            count++;
+            socket.emit('graph', chartFormatter.convert(dataModel.currentData));
+        });
 
     });
 }
 
 
-function send(eventName, data) {
-    localIo.sockets.on('connection', function(socket){
-        socket.emit(eventName, data);
-    })
-}
-
-
 
 exports.init = init;
-exports.send = send;
