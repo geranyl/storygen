@@ -28,19 +28,34 @@ var Log = {
 };
 
 
-
 var socket;
 
-function setSocket(io){
+function setSocket(io) {
     socket = io;
 
-    socket.on('connect', function(){
+    socket.on('connect', function () {
         socket.emit('fetchGraph');
         socket.on('graph', function (data) {
             console.log('grabbing graph')
             console.log(data)
             init(data.items[0]);
         });
+
+        socket.on('updateForm', function (data) {
+            for (var key in data) {
+                var $item = $('#' + key);
+                if ($item.length) {
+                    $item.attr('placeholder', data[key]);
+                    $item.attr('value', data[key]);
+                }
+
+                if(key == 'newNodeId'){
+                    $('#newNodeId2').attr('value', data[key]);
+                }
+            }
+            $('#submission').removeClass('disabled');
+        });
+
     });
 
 }
@@ -120,14 +135,12 @@ function init(json) {
                 //Only apply this method for nodes
                 //in the first level of the tree.
                 if (node._depth % 2 != 0) {
-                        style.cursor = 'pointer';
-                        label.onclick = function () {
-                           var curChoice = label.id;
-                            console.log(curChoice)
+                    style.cursor = 'pointer';
+                    label.onclick = function () {
+                        var curChoice = label.id;
+                        console.log(curChoice)
 
-                            socket.emit('choiceClicked', { choice: curChoice });
-                            $('#submission').removeClass('disabled');
-
+                        socket.emit('choiceClicked', { choice: curChoice });
 
 
 //                            if (!removing) {
@@ -142,8 +155,9 @@ function init(json) {
 //                                    }
 //                                });
 //                            }
-                        }
-                };
+                    }
+                }
+                ;
             },
 //This method is triggered right before plotting a node.
 //This method is useful for adding style
@@ -176,7 +190,7 @@ function init(json) {
         console.log(json)
         st.loadJSON(json);
 
-       st.refresh();
+        st.refresh();
     }
 //end
 

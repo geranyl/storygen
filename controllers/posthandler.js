@@ -14,12 +14,13 @@ var PostHandler = {
 //        console.log(req.body.choice1)
 //        console.log(req.body.choice2)
 
+        console.dir(req.body)
 
 
         //if node doesn't exist yet in the data model, create it, otherwise update it
 
 
-        dataModel.addStoryNode(req.body.nodeId, req.body.title, req.body.copy, req.body.choice1, req.body.choice2, function(){
+        dataModel.addStoryNode(req.body.newnode, req.body.title, req.body.text, req.body.choice1, req.body.choice2, function(){
             render.renderHome(req, res);
         });
 

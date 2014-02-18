@@ -1,10 +1,11 @@
 var state = require('./state.js'),
-    dataModel = require('./datamodel.js').DataModel,
-    chartFormatter = require('./chart.js');
+    dataModel = require('./datamodel.js'),
+    chartFormatter = require('./chart.js'),
+    localIo;
 
 
-var count = 0;
 function init(io){
+    localIo = io;
     io.sockets.on('connection', function (socket) {
         socket.on('choiceClicked', function (data) {
            //TODO: move this out of here - events instead
@@ -12,18 +13,18 @@ function init(io){
         });
         socket.on('fetchGraph', function(data){
 
-            for (var key in dataModel.currentData.items){
-                console.dir(dataModel.currentData.items[key])
-            }
-
-            socket.emit('graph', {data: count});
-            count++;
-            socket.emit('graph', chartFormatter.convert(dataModel.currentData));
+            if(dataModel.DataModel.currentData.items)
+                socket.emit('graph', chartFormatter.convert(dataModel.DataModel.currentData));
         });
 
     });
 }
 
 
+function sendData(eventName, data){
+    localIo.sockets.emit(eventName, data);
+}
+
 
 exports.init = init;
+exports.sendData = sendData;

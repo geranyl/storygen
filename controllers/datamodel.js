@@ -28,12 +28,37 @@ var DataModel = {
 
     addStoryNode: function (id, title, copy, choice1, choice2, cb) {
 
-//
-//        if (id && this.getStoryNode(id)) {
-//            //update the node
-//        } else {
-//            //create a new one
+        console.log('adding story node');
+        console.log(id)
 
+        var existingNode = this.getNode(id);
+
+        if (existingNode) {
+            //update the node
+            console.log('NODE EXISTS - updating', existingNode.id)
+
+            existingNode.title = title;
+            existingNode.copy = copy;
+
+            if(choice1){
+                if(existingNode.choices[0])
+                    existingNode.choices[0].text = choice1;
+                else
+                    existingNode.choices.push(createChoiceNode(0, choice1, existingNode.id));
+            }
+
+            if(choice2){
+                if(existingNode.choices[1])
+                    existingNode.choices[1].text = choice2;
+                else
+                    existingNode.choices.push(createChoiceNode(1, choice2, existingNode.id));
+            }
+
+            this.updateModel(existingNode);
+
+
+        } else {
+            //create a new one
 
             function createChoiceNode(idNum, text, parentNodeId) {
                 var c1 = storyObjs.Choice();
@@ -65,7 +90,7 @@ var DataModel = {
                 state.setChoice(null);
             }
 
-//        }
+        }
         console.log('done updating model')
 
         //write the new node to json
