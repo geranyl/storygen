@@ -5,27 +5,44 @@
             "choices": [
                 {
                     "id": "1_0",
-                    "text": "Choice 1 Text",
+                    "text": "new text for choice 1",
                     "type": 1,
                     "parentNodeId": 1,
                     "nextNodeId": 2
                 },
                 {
                     "id": "1_1",
-                    "text": "Choice 2 Text",
+                    "text": "new text for choice 2",
                     "parentNodeId": 1,
                     "type": 1,
                     "nextNodeId": 3
                 }
             ],
             "title": "Title 1",
-            "text": "Copy for 1"
+            "text": "Copy for 1",
+            "copy": "sdfsdf"
         },
         {
             "id": 3,
             "title": "my title 3",
             "text": "my text 3",
-            "choices": []
+            "choices": [
+                {
+                    "id": "3_0",
+                    "text": "choice A",
+                    "type": 1,
+                    "parentNodeId": 3,
+                    "nextNodeId": -1
+                },
+                {
+                    "id": "3_1",
+                    "text": "Choice B",
+                    "type": 1,
+                    "parentNodeId": 3,
+                    "nextNodeId": -1
+                }
+            ],
+            "copy": ""
         },
         {
             "id": 2,

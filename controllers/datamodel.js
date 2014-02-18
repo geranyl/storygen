@@ -29,6 +29,15 @@ var DataModel = {
 
     addStoryNode: function (id, title, copy, choice1, choice2, cb) {
 
+
+        function createChoiceNode(idNum, text, parentNodeId) {
+            var c1 = storyObjs.Choice();
+            c1.id = parentNodeId + "_" + idNum;
+            c1.text = text;
+            c1.parentNodeId = parentNodeId;
+            return c1;
+        }
+
         console.log('adding story node');
         console.log(id)
 
@@ -61,13 +70,7 @@ var DataModel = {
         } else {
             //create a new one
 
-            function createChoiceNode(idNum, text, parentNodeId) {
-                var c1 = storyObjs.Choice();
-                c1.id = storyNode.id + "_" + idNum;
-                c1.text = text;
-                c1.parentNodeId = storyNode.id;
-                return c1;
-            }
+
 
             var storyNode = storyObjs.StoryNode();
             storyNode.title = title;

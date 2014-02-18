@@ -3,38 +3,58 @@ var storyObjs = require('./storyobjs.js'),
     comm = require('./comm.js');
 
 
-var choiceBeingAddedTo;
+var choiceBeingAddedTo,
+    node,
+    nodeOnly = false;
 
 function getState() {
 
     var obj = {};
     obj.newNodeId = storyObjs.getCurId();
-    obj.disabled = dm.DataModel.isEmpty() || choiceBeingAddedTo ? false : true;
+    obj.disabled = dm.DataModel.isEmpty() || choiceBeingAddedTo ? false : true || nodeOnly;
     obj.dayNum = 2;
+    obj.nodeOnly = nodeOnly;
 
-    if(choiceBeingAddedTo){
-        var nextNode = dm.DataModel.getNode(choiceBeingAddedTo.nextNodeId);
-        if(nextNode){
-            obj.title = nextNode.title;
-            obj.text = nextNode.text;
-            obj.newNodeId = nextNode.id;
-            obj.dayNum  = nextNode.dayNum;
-            for (var i = 0; i<nextNode.choices.length; i++){
-                obj['choice'+(i+1)] = nextNode.choices[i].text;
-            }
+
+    var nextNode;
+    if (choiceBeingAddedTo) {
+        nextNode = dm.DataModel.getNode(choiceBeingAddedTo.nextNodeId);
+        if (nextNode) {
+            node = nextNode;
         }
+    }
+
+
+
+    if (node) {
+        obj.title = node.title;
+        obj.text = node.text;
+        obj.newNodeId = node.id;
+        obj.dayNum = node.dayNum;
+        for (var i = 0; i < node.choices.length; i++) {
+            obj['choice' + (i + 1)] = node.choices[i].text;
+        }
+
     }
 
 
     return  obj;
 }
 
-function setChoice(curChoiceId) {
-    choiceBeingAddedTo = dm.DataModel.getNode(curChoiceId);
+function setChoice(curChoiceId, isNode) {
+    if (!isNode) {
+        nodeOnly = false;
+        choiceBeingAddedTo = dm.DataModel.getNode(curChoiceId);
+        node = null;
+    } else {
+        nodeOnly = true;
+        node = dm.DataModel.getNode(curChoiceId);
+        choiceBeingAddedTo = null;
+    }
 
     comm.sendData('updateForm', getState());
 
-    console.log('being added', choiceBeingAddedTo)
+    console.log('being added', choiceBeingAddedTo);
 }
 
 function getChoice() {

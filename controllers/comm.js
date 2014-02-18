@@ -9,7 +9,7 @@ function init(io){
     io.sockets.on('connection', function (socket) {
         socket.on('choiceClicked', function (data) {
            //TODO: move this out of here - events instead
-            state.setChoice(data.choice);
+            state.setChoice(data.choice, data.nodeOnly);
         });
         socket.on('fetchGraph', function(data){
             console.log('fetching');

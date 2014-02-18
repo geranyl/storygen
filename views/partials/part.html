@@ -2,11 +2,6 @@
 Day Number: {{data.dayNum}}</div>
 
 
-        <form class="form-horizontal" role="form" method="post" action="/">
-            <input type="text" name="delete" value="true"/>
-            <input type="text" id="nodeToDelete" name="nodeId" value=""/>
-            <button id="hiddenSubmit" type="submit">Submit Delete</button>
-        </form>
 
 
 <form class="form-horizontal" role="form" method="post" action="/">
@@ -60,5 +55,11 @@ Day Number: {{data.dayNum}}</div>
         </div>
     </div>
 
+</form>
+
+<form id="deleteForm" style="{{#if nodeOnly}}display: block; {{else}}display: none;{{/if}}" class="form-horizontal" role="form" method="post" action="/">
+    <input type="hidden" name="delete" value="true"/>
+    <input type="hidden" id="nodeToDelete" name="nodeId" value=""/>
+    <button id="hiddenSubmit" class="btn btn-default" type="submit">Delete Node</button>
 </form>
 

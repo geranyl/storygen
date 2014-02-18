@@ -24,15 +24,7 @@ var labelType, useGradients, nativeTextSupport, animate;
 
 
 $(document).ready(function(){
-   $('#yes').on('click', function(){
-       //modal yes clicked
-       console.log('yeS')
-       $('#myModal').modal('hide');
 
-
-
-       $('#hiddenSubmit').click();
-   });
 });
 
 var socket;
@@ -149,14 +141,14 @@ function init(json) {
                         var curChoice = label.id;
                         console.log(curChoice)
 
-                        socket.emit('choiceClicked', { choice: curChoice });
+                        socket.emit('choiceClicked', { choice: curChoice, nodeOnly: false });
                     }
                 } else {
                     //is a story node
                     style.cursor = 'pointer';
                     label.onclick = function() {
                         $('#nodeToDelete').attr('value', label.id);
-                        $('#myModal').modal('show');
+                        socket.emit('choiceClicked', {choice: label.id, nodeOnly:true });
                     }
                 }
             },
