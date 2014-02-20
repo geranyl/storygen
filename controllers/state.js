@@ -12,7 +12,6 @@ function getState() {
     var obj = {};
     obj.newNodeId = storyObjs.getCurId();
     obj.disabled = dm.DataModel.isEmpty() || choiceBeingAddedTo ? false : true || nodeOnly;
-    obj.dayNum = 2;
     obj.nodeOnly = nodeOnly;
 
 
@@ -30,7 +29,6 @@ function getState() {
         obj.title = node.title;
         obj.text = node.text;
         obj.newNodeId = node.id;
-        obj.dayNum = node.dayNum;
         for (var i = 0; i < node.choices.length; i++) {
             obj['choice' + (i + 1)] = node.choices[i].text;
         }

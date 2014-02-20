@@ -42,10 +42,16 @@ function setSocket(io) {
         });
 
         socket.on('updateForm', function (data) {
+
+            $.each($('.clearable'), function(){
+                $(this).removeAttr('value');
+                $(this).html('');
+            });
+
             for (var key in data) {
                 var $item = $('#' + key);
                 if ($item.length) {
-                    $item.attr('placeholder', data[key]);
+                    $item.html(data[key]);
                     $item.attr('value', data[key]);
                 }
 
@@ -54,6 +60,12 @@ function setSocket(io) {
                 }
             }
             $('#submission').removeClass('disabled');
+
+            if(data.nodeOnly){
+                $('#deleteForm').css('display', 'block');
+            }else{
+                $('#deleteForm').css('display', 'none');
+            }
         });
 
     });

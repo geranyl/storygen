@@ -48,7 +48,7 @@ var DataModel = {
             console.log('NODE EXISTS - updating', existingNode.id)
 
             existingNode.title = title;
-            existingNode.copy = copy;
+            existingNode.text = copy;
 
             if(choice1){
                 if(existingNode.choices[0])

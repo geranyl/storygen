@@ -22,8 +22,8 @@ function removeNode(id){
         }
     }
 
-    if (processedNodes.indexOf(item.id) == -1) {
-        processedNodes.push(item.id);
+    if (processedNodes.indexOf(id) == -1) {
+        processedNodes.push(id);
     }
 
 

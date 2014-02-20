@@ -1,5 +1,4 @@
-<div>Story Node Id: <span id="newNodeId">{{data.newNodeId}}</span><br/>
-Day Number: {{data.dayNum}}</div>
+<div>Story Node Id: <span id="newNodeId">{{data.newNodeId}}</span></div>
 
 
 
@@ -16,7 +15,7 @@ Day Number: {{data.dayNum}}</div>
         <label for="title" class="col-sm-2 control-label">Title</label>
 
         <div class="col-sm-10">
-            <input type="text" class="form-control" id="title" name="title" placeholder="title">
+            <input type="text" class="form-control clearable" id="title" name="title" placeholder="title">
         </div>
     </div>
 
@@ -24,7 +23,7 @@ Day Number: {{data.dayNum}}</div>
     <div class="form-group">
         <label for="text" class="col-sm-2 control-label">Story Copy:</label>
 
-        <div class="col-sm-10"><textarea class="form-control" id="text" rows="3" placeholder="copy"
+        <div class="col-sm-10"><textarea class="form-control clearable" id="text" rows="3" placeholder="copy"
                                          name="text"></textarea></div>
     </div>
 
@@ -33,14 +32,14 @@ Day Number: {{data.dayNum}}</div>
     <div class="form-group">
         <label for="choice1" class="col-sm-2 control-label">Choice 1 Copy:</label>
 
-        <div class="col-sm-10"><textarea class="form-control" id="choice1" rows="3" placeholder="First Choice"
+        <div class="col-sm-10"><textarea class="form-control clearable" id="choice1" rows="3" placeholder="First Choice"
                                          name="choice1"></textarea></div>
     </div>
 
     <div class="form-group">
         <label for="choice2" class="col-sm-2 control-label">Choice 2 Copy:</label>
 
-        <div class="col-sm-10"><textarea class="form-control" id="choice2" rows="3" placeholder="Second Choice"
+        <div class="col-sm-10"><textarea class="form-control clearable" id="choice2" rows="3" placeholder="Second Choice"
                                          name="choice2"></textarea></div>
     </div>
 
@@ -57,7 +56,7 @@ Day Number: {{data.dayNum}}</div>
 
 </form>
 
-<form id="deleteForm" style="{{#if nodeOnly}}display: block; {{else}}display: none;{{/if}}" class="form-horizontal" role="form" method="post" action="/">
+<form id="deleteForm" style="display: none;" class="form-horizontal" role="form" method="post" action="/">
     <input type="hidden" name="delete" value="true"/>
     <input type="hidden" id="nodeToDelete" name="nodeId" value=""/>
     <button id="hiddenSubmit" class="btn btn-default" type="submit">Delete Node</button>

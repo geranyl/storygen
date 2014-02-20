@@ -15,7 +15,7 @@ StoryNode.prototype = {
             return this.id;
     },
     toString: function(){
-        return 'ID: '+this.id+' Day: '+this.day+' Title: '+this.title+ ' Text: '+this.text+' Choices: '+this.choices;
+        return 'ID: '+this.id+' Title: '+this.title+ ' Text: '+this.text+' Choices: '+this.choices;
     }
 }
 
@@ -23,7 +23,6 @@ StoryNode.prototype = {
 function createStoryNode(){
     var sn = Object.create(StoryNode.prototype, {
         id:{writable: true, configurable: true, enumerable: true, value: null},
-        day:{writable: true, configurable: true, enumerable: true, value:-1},
         title:{writable: true, configurable: true, enumerable: true, value:''},
         text:{writable: true, configurable: true, enumerable: true, value:''},
         choices:{writable: true, configurable: true, enumerable: true, value:[]}

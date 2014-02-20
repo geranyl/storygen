@@ -2,75 +2,94 @@
     "items": [
         {
             "id": 1,
+            "title": "Day 0",
+            "text": "Congratulations! You landed the pitch! Site’s gotta be done in two weeks - that’s 10 working days -- if you don’t want to work weekends that is.\r\nDo you:",
             "choices": [
                 {
                     "id": "1_0",
-                    "text": "new text for choice 1",
+                    "text": "Set up your framework and start coding any functionality you can without assets?",
                     "type": 1,
                     "parentNodeId": 1,
                     "nextNodeId": 2
                 },
                 {
                     "id": "1_1",
-                    "text": "new text for choice 2",
-                    "parentNodeId": 1,
+                    "text": "Wait until final assets are delivered. You don’t want to have to recode stuff right? The design team said they’d have it to you in a couple of days … tops.",
                     "type": 1,
+                    "parentNodeId": 1,
                     "nextNodeId": 3
                 }
-            ],
-            "title": "Title 1",
-            "text": "Copy for 1",
-            "copy": "sdfsdf"
-        },
-        {
-            "id": 3,
-            "title": "my title 3",
-            "text": "my text 3",
-            "choices": [
-                {
-                    "id": "3_0",
-                    "text": "choice A",
-                    "type": 1,
-                    "parentNodeId": 3,
-                    "nextNodeId": -1
-                },
-                {
-                    "id": "3_1",
-                    "text": "Choice B",
-                    "type": 1,
-                    "parentNodeId": 3,
-                    "nextNodeId": -1
-                }
-            ],
-            "copy": ""
+            ]
         },
         {
             "id": 2,
+            "title": "Day 1",
+            "text": "Nice. You’ve created your git repo, started the site framework and are working on coding basic utility functions. At this rate you’ll have no problems meeting the deadline.",
             "choices": [
                 {
                     "id": "2_0",
-                    "text": "Choice text",
-                    "parentNodeId": 2,
+                    "text": "You find out the client wants some strange \"context sensitive\" navigation system that may or may not jump you through other sections of the site. Time to look up those shortest path algorithms. Now was it A* or Dijkstra?",
                     "type": 1,
+                    "parentNodeId": 2,
                     "nextNodeId": 4
-                },
-                {
-                    "id": "2_1",
-                    "text": "More choice text",
-                    "parentNodeId": 2,
-                    "type": 1,
-                    "nextNodeId": -1
                 }
-            ],
-            "title": "Node 2 title",
-            "text": " Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean feugiat ante quis dolor blandit, vel vehicula lorem iaculis. Integer vel nisi sed libero dictum euismod. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Aliquam non augue vehicula lectus sodales commodo ut at massa. In at diam a magna euismod viverra. Maecenas bibendum turpis ut vestibulum dictum. Nunc ullamcorper nunc ante, non adipiscing leo hendrerit varius. Sed sit amet porta sapien. Etiam bibendum elit accumsan nisl molestie venenatis."
+            ]
+        },
+        {
+            "id": 3,
+            "title": "Day 1",
+            "text": "Reddit, reddit, some more reddit. So... much... cute... so... much... sarcasm. Oh the addiction.",
+            "choices": [
+                {
+                    "id": "3_0",
+                    "text": "You find yourself hooked on \"nailed it\" photos. Can't...tear...eyes...away.",
+                    "type": 1,
+                    "parentNodeId": 3,
+                    "nextNodeId": 5
+                }
+            ]
         },
         {
             "id": 4,
-            "day": -1,
-            "title": "sdf",
-            "text": "sdfs",
-            "choices": []
+            "title": "Day 2",
+            "text": "This algorithm stuff is complicated. Maybe they didn't really intend on the navigation to be this crazy.\r\nShould you:",
+            "choices": [
+                {
+                    "id": "4_0",
+                    "text": "Keep plugging away. You understand the brief and hey, complicated is cool, right?",
+                    "type": 1,
+                    "parentNodeId": 4,
+                    "nextNodeId": -1
+                },
+                {
+                    "id": "4_1",
+                    "text": "Harass the UX guy. This whacky nav can't possibly be what they intended. Maybe something got lost in translation and you can save yourself a bit of time.",
+                    "type": 1,
+                    "parentNodeId": 4,
+                    "nextNodeId": -1
+                }
+            ]
+        },
+        {
+            "id": 5,
+            "title": "Day 2",
+            "text": "Alright, you're reddited out. Maybe it's time to: ",
+            "choices": [
+                {
+                    "id": "5_0",
+                    "text": "Read up on the latest and greatest stuff in the front-end development world.",
+                    "type": 1,
+                    "parentNodeId": 5,
+                    "nextNodeId": -1
+                },
+                {
+                    "id": "5_1",
+                    "text": "Meander by the art department casually to spy on where they're at with things.",
+                    "type": 1,
+                    "parentNodeId": 5,
+                    "nextNodeId": -1
+                }
+            ]
         }
     ]
 }
