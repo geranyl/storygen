@@ -3,18 +3,18 @@
         {
             "id": 1,
             "title": "Day 0",
-            "text": "Congratulations! You landed the pitch! Site’s gotta be done in two weeks - that’s 10 working days -- if you don’t want to work weekends that is.\r\nDo you:",
+            "text": "Congrats! Your shop landed the pitch. Oh, and it happened a few weeks ago. They just forgot to tell you, the developer. You have five work days to hand a finished project over to the client, annnnd creative isn't done yet. What would you like to do now?",
             "choices": [
                 {
                     "id": "1_0",
-                    "text": "Set up your framework and start coding any functionality you can without assets?",
+                    "text": "Harass creative to get a rough idea of what the site is and get started on a basic framework.",
                     "type": 1,
                     "parentNodeId": 1,
                     "nextNodeId": 2
                 },
                 {
                     "id": "1_1",
-                    "text": "Wait until final assets are delivered. You don’t want to have to recode stuff right? The design team said they’d have it to you in a couple of days … tops.",
+                    "text": "You're going to end up redoing work if you start ahead of creative sign off. Might as well wait until they're done. They said they'd be done in a couple more days, tops.",
                     "type": 1,
                     "parentNodeId": 1,
                     "nextNodeId": 3
@@ -24,11 +24,11 @@
         {
             "id": 2,
             "title": "Day 1",
-            "text": "Nice. You’ve created your git repo, started the site framework and are working on coding basic utility functions. At this rate you’ll have no problems meeting the deadline.",
+            "text": "Well, looks like the design team is working on two versions of the site: one for desktop and one for mobile. That means only one thing - responsive design! It looks like the home page is unofficially final, so you get started on that. After all, how much could that possibly change?",
             "choices": [
                 {
                     "id": "2_0",
-                    "text": "You find out the client wants some strange \"context sensitive\" navigation system that may or may not jump you through other sections of the site. Time to look up those shortest path algorithms. Now was it A* or Dijkstra?",
+                    "text": "Chip away at getting the site set up and the home page completed.",
                     "type": 1,
                     "parentNodeId": 2,
                     "nextNodeId": 4
@@ -38,58 +38,288 @@
         {
             "id": 3,
             "title": "Day 1",
-            "text": "Reddit, reddit, some more reddit. So... much... cute... so... much... sarcasm. Oh the addiction.",
+            "text": "No assets means no work. It's time to:",
             "choices": [
                 {
                     "id": "3_0",
-                    "text": "You find yourself hooked on \"nailed it\" photos. Can't...tear...eyes...away.",
+                    "text": "Catch up on your redditing.",
                     "type": 1,
                     "parentNodeId": 3,
                     "nextNodeId": 5
+                },
+                {
+                    "id": "3_1",
+                    "text": "Do some reading about JavaScript best practices. ",
+                    "type": 1,
+                    "parentNodeId": 3,
+                    "nextNodeId": 6
                 }
             ]
         },
         {
             "id": 4,
             "title": "Day 2",
-            "text": "This algorithm stuff is complicated. Maybe they didn't really intend on the navigation to be this crazy.\r\nShould you:",
+            "text": "The desktop version of the home page is more or less complete. You get started on mobile only to realize that the sizes between iPhone and desktop hadn't really been thought about. Boy are you ever screwed now. Nothing will stack easily and you're faced with duplicating elements that you the have to show and hide. It's only day two and you're already worried this site won't get done. You know, FITC had some talks last year about responsive design. Maybe if your team had attended you wouldn't be in such a sticky situation. ",
             "choices": [
                 {
                     "id": "4_0",
-                    "text": "Keep plugging away. You understand the brief and hey, complicated is cool, right?",
+                    "text": "Crawl under your desk, curl up into a tiny ball and hope it all goes away.",
                     "type": 1,
                     "parentNodeId": 4,
-                    "nextNodeId": -1
+                    "nextNodeId": 8
                 },
                 {
                     "id": "4_1",
-                    "text": "Harass the UX guy. This whacky nav can't possibly be what they intended. Maybe something got lost in translation and you can save yourself a bit of time.",
+                    "text": "Grit you teeth and get going. This job isn't going to finish itself you know.",
                     "type": 1,
                     "parentNodeId": 4,
-                    "nextNodeId": -1
+                    "nextNodeId": 9
                 }
             ]
         },
         {
             "id": 5,
             "title": "Day 2",
-            "text": "Alright, you're reddited out. Maybe it's time to: ",
+            "text": "Oh good, creative got approved. Time to take a look. Oh it's a responsive site (of course) and wow, looks like there's a lot of inconsistent components throughout the site. Maybe if the design team worked with something other than Photoshop this wouldn't be a problem. You vaguely recall that Adobe usually presents at FITC. Maybe this year they'll discuss better workflows for responsive design. ",
             "choices": [
                 {
                     "id": "5_0",
-                    "text": "Read up on the latest and greatest stuff in the front-end development world.",
+                    "text": "Start working. You'll do your usual best guess at making components consistent.",
                     "type": 1,
                     "parentNodeId": 5,
-                    "nextNodeId": -1
+                    "nextNodeId": 17
                 },
                 {
                     "id": "5_1",
-                    "text": "Meander by the art department casually to spy on where they're at with things.",
+                    "text": "Go back to the creative department with your complaints.",
                     "type": 1,
                     "parentNodeId": 5,
-                    "nextNodeId": -1
+                    "nextNodeId": 10
                 }
             ]
+        },
+        {
+            "id": 6,
+            "title": "Day 2",
+            "text": "Oh good, creative got approved. Time to take a look. Oh it's a responsive site (of course) and wow, looks like there's a lot of inconsistent components throughout the site. Maybe if the design team worked with something other than Photoshop this wouldn't be a problem. You vaguely recall that Adobe usually presents at FITC. Maybe this year they'll discuss better workflows for responsive design. ",
+            "choices": [
+                {
+                    "id": "6_0",
+                    "text": "Grab some caffeine and get to work.",
+                    "type": 1,
+                    "parentNodeId": 6,
+                    "nextNodeId": 7
+                }
+            ]
+        },
+        {
+            "id": 7,
+            "title": "Day 3",
+            "text": "Even though responsive design is still driving you a little insane, you're a little happier with your JavaScript. You think you're doing it the \"right way\", but it would be nice to hear from people in the industry in how they approach writing JavaScript that touches the DOM. There's bound to be a talk about that at FITC right?",
+            "choices": [
+                {
+                    "id": "7_0",
+                    "text": "Keep on working. It's the 9 to something something grind and you're in it.",
+                    "type": 1,
+                    "parentNodeId": 7,
+                    "nextNodeId": 23
+                }
+            ]
+        },
+        {
+            "id": 8,
+            "title": "Day 3",
+            "text": "Guess what, the project hasn't gone away. Your bosses aren't very pleased with your can't do attitude and the timeline hasn't changed.",
+            "choices": [
+                {
+                    "id": "8_0",
+                    "text": "Get to work. Gotsta pay your bills and whatnot.",
+                    "type": 1,
+                    "parentNodeId": 8,
+                    "nextNodeId": 11
+                }
+            ]
+        },
+        {
+            "id": 9,
+            "title": "Day 3",
+            "text": "Surprise, it's a coworker's birthday. You just lost four hours of your day and you're a tad over Ballmer's peak. That was probably one beer too many and that cake isn't sitting too well. ",
+            "choices": [
+                {
+                    "id": "9_0",
+                    "text": "Slow and tipsy does it.",
+                    "type": 1,
+                    "parentNodeId": 9,
+                    "nextNodeId": 12
+                }
+            ]
+        },
+        {
+            "id": 10,
+            "title": "Day 3",
+            "text": "Creative hummed and hawed over your complaints and in the end, none of the comps were changed. You leave with some vague advice for what they think you should do. Well, there goes half a day.",
+            "choices": [
+                {
+                    "id": "10_0",
+                    "text": "Back to work.",
+                    "type": 1,
+                    "parentNodeId": 10,
+                    "nextNodeId": 21
+                }
+            ]
+        },
+        {
+            "id": 11,
+            "title": "Day 4",
+            "text": "Looks like you shouldn't have crawled under your desk the other day. You're really behind and the project is due tomorrow.",
+            "choices": [
+                {
+                    "id": "11_0",
+                    "text": "Pull an all nighter. You might be able to get it done on time...kinda.",
+                    "type": 1,
+                    "parentNodeId": 11,
+                    "nextNodeId": 15
+                },
+                {
+                    "id": "11_1",
+                    "text": "Tell the project manager there's no way this is getting done.",
+                    "type": 1,
+                    "parentNodeId": 11,
+                    "nextNodeId": 16
+                }
+            ]
+        },
+        {
+            "id": 12,
+            "title": "Day 4",
+            "text": "Hey, nice job. You managed to get the home page looking fairly decent at both mobile and desktop size and somehow everything in between. Feeling pretty good, you decide to take a break. After all, it's a super small site. Only a few pages. After some snack and reddit time you check your email. Ah the dreaded client changes mail forward. Guess you'll be redoing most of the homepage!",
+            "choices": [
+                {
+                    "id": "12_0",
+                    "text": "Grudgingly get back to it. If you rush through these changes you might be able to finish the other pages before the deadline.",
+                    "type": 1,
+                    "parentNodeId": 12,
+                    "nextNodeId": 13
+                },
+                {
+                    "id": "12_1",
+                    "text": "Put your foot down and tell the project manager you can't make the changes and still deliver on time.",
+                    "type": 1,
+                    "parentNodeId": 12,
+                    "nextNodeId": 14
+                }
+            ]
+        },
+        {
+            "id": 13,
+            "title": "Day 5",
+            "text": "Well, it's an hour until the deadline and the site is more or less done. Pretty sloppy though with all those rushed changes. You're not feeling too confident about the upcoming presentation to the client and hope they don't notice too many issues. You know, FITC might not be able to do much about you drinking too much at a birthday party, but it sure can help with figuring out a better way to go about responsive design! You should probably find a way to attend.",
+            "choices": []
+        },
+        {
+            "id": 14,
+            "title": "Day 5",
+            "text": "It's deadline day and it's time to cough up some excuses for the client without throwing anyone under the bus. Your team isn't too pleased with you. Doesn't it seem like you're always the one who gets dumped on with time line crunches? FITC might be able to help with coming up with a better process. Maybe this waterfall you're always at the end of could use a touch of agile. You should find a way to attend this year.",
+            "choices": []
+        },
+        {
+            "id": 15,
+            "title": "Day 5",
+            "text": "Anyone ever tell you that an hour of sleep is worse than no sleep at all? The world is somewhat blurry, but that's ok. You won't notice the major flaws in your \"finished\" work that way, right? With all the great people speaking at FITC you might find some inspiration and tips that would prevent you from having any more desk episodes. You should probably go. ",
+            "choices": []
+        },
+        {
+            "id": 16,
+            "title": "Day 5",
+            "text": "The project isn't done. Your team is none too pleased. Your project manager is super angry you didn't communicate your concerns about the timeline earlier. Better communication skills might help with that. FITC can probably hook you up with some of that. After all, it does encourage networking and there are good talks on process. You should find a way to go. ",
+            "choices": []
+        },
+        {
+            "id": 17,
+            "title": "Day 3",
+            "text": "Hey look, it's the fifth slightly different shade of orange you've found for the same style of headline. If only there was something other than Photoshop designers might be able to keep this stuff consistent and make your life easier. Perhaps FITC has something about new design workflows this year.",
+            "choices": [
+                {
+                    "id": "17_0",
+                    "text": "Slow and frustrated does it. ",
+                    "type": 1,
+                    "parentNodeId": 17,
+                    "nextNodeId": 18
+                }
+            ]
+        },
+        {
+            "id": 18,
+            "title": "Day 4",
+            "text": "You made the mistake of showing creative what you have for component states so far. Without their guidance you made the best guesses you could. Turns out the design team doesn't like your creative flair. Time to redo a lot of stuff. There goes your day.",
+            "choices": [
+                {
+                    "id": "18_0",
+                    "text": "Stay late to make up for lost time.",
+                    "type": 1,
+                    "parentNodeId": 18,
+                    "nextNodeId": 19
+                },
+                {
+                    "id": "18_1",
+                    "text": "Go home on time. Got to get to the climbing gym. After all, what better way to cope with work that makes you want to climb walls than to do exactly that?",
+                    "type": 1,
+                    "parentNodeId": 18,
+                    "nextNodeId": 20
+                }
+            ]
+        },
+        {
+            "id": 19,
+            "title": "Day 5",
+            "text": "Congrats, the site is more or less done. You're hoping it passes muster but you're not feeling too confident about it. FITC usually has some great talks about workflow. They might have helped make this project much smoother even with a tight timeline. You should go this year.",
+            "choices": []
+        },
+        {
+            "id": 20,
+            "title": "Day 5",
+            "text": "Site's not quit done but at least you're healthy. Might not be for much longer with the way your team is eying you though. Time to cough up some excuses. You might have picked up some good tips at FITC that would have helped avoid this unfortunate situation. You should really try to go this year.",
+            "choices": []
+        },
+        {
+            "id": 21,
+            "title": "Day 4",
+            "text": "Going back to the design team wasted a lot of time. You're super behind on this project. You're going to have to stay late to have any hope of getting this done. ",
+            "choices": [
+                {
+                    "id": "21_0",
+                    "text": "Stay late and git 'er done.",
+                    "type": 1,
+                    "parentNodeId": 21,
+                    "nextNodeId": 22
+                }
+            ]
+        },
+        {
+            "id": 22,
+            "title": "Day 5",
+            "text": "Late nights aren't always the most productive nights. You got stuck on a minor bug that took entirely too long to solve. Then again don't all bugs seem so simple in hindsight? The site is done but not really up to snuff. The client isn't going to be happy and you know it. FITC probably has some tips that could have helped prevent that back and forth with the creative team. You should go this year.",
+            "choices": []
+        },
+        {
+            "id": 23,
+            "title": "Day 4",
+            "text": "You're feeling like you should have probably started coding the site before final assets arrived. There's a mountain of work still ahead and the project is due tomorrow. Your CSS is becoming increasingly more disorganized as you rush the project to completion. There's got to be a better way to architect CSS than what you're doing, but there's no time to look into it. You know, FITC might have a talk on that. ",
+            "choices": [
+                {
+                    "id": "23_0",
+                    "text": "Stay late and keep working. The bosses have already put in your overtime pizza order.",
+                    "type": 1,
+                    "parentNodeId": 23,
+                    "nextNodeId": 24
+                }
+            ]
+        },
+        {
+            "id": 24,
+            "title": "Day 5",
+            "text": "Yay, you're done. It'll be impossible to update the site later because you have no idea what you did last night, but who cares, you're done! Oh wait, future you will care when this project comes back to bite you - hard. You should head out to FITC this year and gather up some ideas for better ways to organize yourself to prevent delusional late nights.",
+            "choices": []
         }
     ]
 }

@@ -93,7 +93,7 @@ function init(json) {
         //Create a new ST instance
         st = new $jit.ST({
             align: 'top',
-            orientation: 'top', //when top it won't render past the first level - blargh
+            orientation: 'left',
             injectInto: 'infovis',
             constrained: false, //doesn't seem to override anything - it's supposed to show the whole graph
             levelsToShow: 20,
